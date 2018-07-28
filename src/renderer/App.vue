@@ -6,10 +6,11 @@
 
 <script>
   export default {
-    name: 'mango'
+    name: 'Scarlet'
   }
 </script>
 
-<style>
-  /* CSS */
+<style lang="stylus">
+body
+  margin 0
 </style>
