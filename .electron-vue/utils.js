@@ -1,3 +1,5 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 exports.cssLoaders = function (options) {
   options = options || {}
 
