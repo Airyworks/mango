@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import axios from 'axios'
+import VueTree from 'liquor-tree'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import App from './App'
 import router from './router'
 import store from './store'
 
+Vue.use(VueTree)
 Vue.use(MuseUI)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))

@@ -33,7 +33,7 @@
   import SystemInformation from './LandingPage/SystemInformation'
 
   export default {
-    name: 'landing-page',
+    name: 'Viewer',
     components: { SystemInformation },
     methods: {
       open (link) {

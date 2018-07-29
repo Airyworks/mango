@@ -4485,6 +4485,10 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/invert-kv/download/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
+ionicons@^4.2.5:
+  version "4.2.5"
+  resolved "http://registry.npm.taobao.org/ionicons/download/ionicons-4.2.5.tgz#1665e8e08458ffa1a74aaf9f33ed00bce65f1a3c"
+
 ip@^1.1.0, ip@^1.1.5:
   version "1.1.5"
   resolved "http://registry.npm.taobao.org/ip/download/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
@@ -4980,6 +4984,10 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+liquor-tree@^0.2.30:
+  version "0.2.30"
+  resolved "http://registry.npm.taobao.org/liquor-tree/download/liquor-tree-0.2.30.tgz#08b4534209caea593990e928cd23527e8a316f66"
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -8263,6 +8271,10 @@ vue-html-loader@^1.2.4:
     html-minifier "^2.1.5"
     loader-utils "^1.0.2"
     object-assign "^4.1.0"
+
+vue-ionicons@^2.2.1:
+  version "2.2.1"
+  resolved "http://registry.npm.taobao.org/vue-ionicons/download/vue-ionicons-2.2.1.tgz#2837b1af7bce53154e1e951cc677fec1e9dbbc47"
 
 vue-loader@^13.0.5:
   version "13.7.2"
