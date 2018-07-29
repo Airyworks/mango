@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-documents">
+  <div class="sc-documents" name="documents">
     <div class="sc-preview-container">
       <Preview v-for="i in previewArr" :key="i" :data="i"/>
     </div>
@@ -33,11 +33,14 @@
     padding-top 25px
     height 100vh
     overflow-y auto
+    display grid
+    grid-template-columns 20px auto 20px
+    justify-content center
 
     .sc-preview-container
-      display flex
-      flex-wrap wrap
-      justify-content center
-
-
+      grid-column-start 2
+      display grid
+      for i in 1..20
+        @media (min-width: (220 + 200 * (i))px) and (max-width: (220 + 200 * (i + 1))px)
+          grid-template-columns: repeat(i, 200px)
 </style>

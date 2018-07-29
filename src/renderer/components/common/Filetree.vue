@@ -2,17 +2,18 @@
   <div class="sc-filetree">
     <tree
         :data="treeData"
+        :options="treeOptions"
         ref="tree"
     >
       <span class="tree-text" slot-scope="{ node }">
         <template v-if="!node.hasChildren()">
-          <MdStarIcon/>
+          <MdStarIcon w="10px" h="10px"/>
           {{ node.text }}
         </template>
 
         <template v-else>
-          <IosFolderOpenIcon v-show="node.expanded()"/>
-          <MdFolderIcon v-show="!node.expanded()"/>
+          <IosFolderOpenIcon w="10px" h="10px" v-show="node.expanded()"/>
+          <MdFolderIcon w="10px" h="10px" v-show="!node.expanded()"/>
           {{ node.text }}
         </template>
       </span>
@@ -30,6 +31,9 @@
     components: { MdFolderIcon, IosFolderOpenIcon, MdStarIcon },
     data () {
       return {
+        treeOptions: {
+          paddingLeft: 10
+        },
         treeData: [
           {
             text: 'Disc C:',
