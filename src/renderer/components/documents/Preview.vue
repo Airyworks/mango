@@ -28,7 +28,7 @@
 
 <style lang="stylus" scoped>
 .sc-preview
-  margin 10px 0
+  margin 10px 20px
   width 180px
   padding 0
   display inline-block
