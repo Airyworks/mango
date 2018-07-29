@@ -1,6 +1,5 @@
 <template>
   <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="left-side">
         <span class="title">
@@ -33,7 +32,7 @@
   import SystemInformation from './LandingPage/SystemInformation'
 
   export default {
-    name: 'landing-page',
+    name: 'Viewer',
     components: { SystemInformation },
     methods: {
       open (link) {
