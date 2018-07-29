@@ -12,7 +12,6 @@
     "renderer": {
       "presets": [
         ["env", {
-          "modules": false
         }],
         "stage-0"
       ]
