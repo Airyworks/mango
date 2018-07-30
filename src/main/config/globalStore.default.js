@@ -1,4 +1,3 @@
-const globalDefault = require('./global.default')
 module.exports = {
   data: {
     time: 0,
@@ -7,8 +6,7 @@ module.exports = {
     books: 0 // total books
   },
   files: {
-    root: [],
-    magnetDir: globalDefault.downloadDir
+    root: []
   },
   tags: {}
 }

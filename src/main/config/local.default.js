@@ -1,6 +1,7 @@
 module.exports = {
   process: 0,
-  sort: (a, b) => parseInt(a) - parseInt(b),
+  sort: 0, // 0: 001.png -> 100.png; 1 100.png -> 001.png
+  // or array
   label: [],
   data: {
     pages: 0,

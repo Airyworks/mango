@@ -4,9 +4,12 @@ const FileSync = require('lowdb/adapters/FileSync')
 const localDefault = require('../config/local.default.js')
 
 module.exports = (folderPath) => {
-  return {
-    db: low(new FileSync(path.join(folderPath, '.scarlet.json'), {
-      defaultValue: localDefault
-    }))
-  }
+  const realPath = path.join(folderPath, '.scarlet.json')
+  // if win platform, add hidden attr
+
+  const db = low(new FileSync(realPath, {
+    defaultValue: localDefault
+  }))
+  db.write()
+  return db
 }
