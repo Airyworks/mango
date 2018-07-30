@@ -1,3 +1,7 @@
 module.exports = {
-  forceReload() {}
+  forceReload() {},
+  getRoots() {
+    return require('../repository/root').getRoots()
+  },
+  getTree(root) {}
 }

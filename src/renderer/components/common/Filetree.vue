@@ -30,42 +30,47 @@
     name: 'Filetree',
     components: { MdFolderIcon, IosFolderOpenIcon, MdStarIcon },
     data () {
+      const scanner = require('../../data/filetree/util').scanDir
+      const time = new Date()
+      const treeData = scanner('')
+      console.log(new Date().getTime() - time.getTime())
       return {
         treeOptions: {
           paddingLeft: 10
         },
-        treeData: [
-          {
-            text: 'Disc C:',
-            state: { expanded: true },
-            children: [
-              { text: 'PerfLogs' },
-              { text: 'Users',
-                children: [
-                  { text: 'User 1' },
-                  { text: 'User 2' },
-                  { text: 'User 3' }
-                ]},
-              { text: 'tomcat' },
-              { text: 'sysCache' },
-              { text: 'Program Files',
-                children: [
-                  { text: 'Intel' },
-                  { text: 'Internet Explorer' },
-                  { text: 'Opera' },
-                  {
-                    text: 'Oracle',
-                    children: [
-                      { text: 'Intel' },
-                      { text: 'Internet Explorer' },
-                      { text: 'Opera' },
-                      { text: 'Oracle' }
-                    ]
-                  }
-                ]}
-            ]
-          }
-        ]
+        treeData
+        // treeData: [
+        //   {
+        //     text: 'Disc C:',
+        //     state: { expanded: true },
+        //     children: [
+        //       { text: 'PerfLogs' },
+        //       { text: 'Users',
+        //         children: [
+        //           { text: 'User 1' },
+        //           { text: 'User 2' },
+        //           { text: 'User 3' }
+        //         ]},
+        //       { text: 'tomcat' },
+        //       { text: 'sysCache' },
+        //       { text: 'Program Files',
+        //         children: [
+        //           { text: 'Intel' },
+        //           { text: 'Internet Explorer' },
+        //           { text: 'Opera' },
+        //           {
+        //             text: 'Oracle',
+        //             children: [
+        //               { text: 'Intel' },
+        //               { text: 'Internet Explorer' },
+        //               { text: 'Opera' },
+        //               { text: 'Oracle' }
+        //             ]
+        //           }
+        //         ]}
+        //     ]
+        //   }
+        // ]
       }
     },
     methods: {
