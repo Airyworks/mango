@@ -2,26 +2,48 @@
   <div class="sc-preview"
     @click="open">
     <div class="sc-preview-img-container">
-      <img class="sc-preview-img" src="/static/test/56011481_p0.png">
+      <img class="sc-preview-img" :src="img">
     </div>
     <div class="sc-preview-intro-container">
-      <p class="sc-preview-intro-title">性感荷官</p>
-      <a class="sc-preview-intro-more">18P</a>
+      <p class="sc-preview-intro-title">{{ title }}</p>
+      <a class="sc-preview-intro-more">{{ p }}P</a>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     name: 'Preview',
     components: { },
     data() {
-      return { }
+      return {
+        img: '/static/test/56011481_p0.png',
+        title: '性感荷官',
+        p: 18
+      }
+    },
+    props: {
+      root: {
+        type: String,
+        default: '/static/test/56011481_p0.png'
+      },
+      path: {
+        type: String,
+        default: '/static/test/56011481_p0.png'
+      }
     },
     methods: {
       open(e) {
+        this.setReading({
+          root: this.root,
+          path: this.path,
+          title: this.title
+        })
         this.$router.push('viewer')
-      }
+      },
+      ...mapActions(['setReading'])
     }
   }
 </script>

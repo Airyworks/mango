@@ -1,10 +1,13 @@
 <template>
   <div class="sc-viewer" name="viewer">
-    <Nav/>
+    <Nav :msg="reading.title"/>
+    <div class="sc-viewer-main">
+    </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import Nav from '@/components/viewer/Nav'
 
   export default {
@@ -17,6 +20,11 @@
       open (link) {
         this.$electron.shell.openExternal(link)
       }
+    },
+    computed: {
+      ...mapState({
+        reading: state => state.Reading.reading
+      })
     }
   }
 </script>
@@ -31,5 +39,6 @@
     grid-template-rows 60px 1fr 150px
     grid-template-columns 50px 1fr 50px
     justify-content center
-
+    .sc-viewer-test
+      grid-column 2 / 3
 </style>
