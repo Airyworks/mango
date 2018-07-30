@@ -41,7 +41,7 @@
     display inline
     vertical-align middle
   
-  .tree-text
+  .sc-tree-text
     height 20px
     font-size 11px
 

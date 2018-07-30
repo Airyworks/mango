@@ -2,6 +2,7 @@
   <div class="sc-viewer" name="viewer">
     <Nav :msg="reading.title"/>
     <div class="sc-viewer-main">
+      <img src="/static/test/69108255_p0.jpg"/>
     </div>
   </div>
 </template>
@@ -39,6 +40,7 @@
     grid-template-rows 60px 1fr 150px
     grid-template-columns 50px 1fr 50px
     justify-content center
-    .sc-viewer-test
+    .sc-viewer-main
       grid-column 2 / 3
+      
 </style>
