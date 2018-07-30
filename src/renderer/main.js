@@ -14,16 +14,6 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
-const dd = require('electron').remote.require('./db')
-console.log(dd)
-// const cgdb = require('electron').remote.require('./db/global').configDb
-// const sgdb = require('electron').remote.require('./db/global').storeDb
-// const ldbf = require('electron').remote.require('./db/local')
-// const ldb = ldbf('E:\\test')
-// cgdb.write()
-// sgdb.write()
-// ldb.write()
-
 /* eslint-disable no-new */
 new Vue({
   components: { App },
