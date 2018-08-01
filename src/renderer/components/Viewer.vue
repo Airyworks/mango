@@ -2,7 +2,7 @@
   <div class="sc-viewer" name="viewer">
     <Nav :msg="reading.title"/>
     <div class="sc-viewer-main">
-      <img src="/static/test/69108255_p0.jpg"/>
+      <Gallary :images="images"/>
     </div>
   </div>
 </template>
@@ -10,12 +10,22 @@
 <script>
   import { mapState } from 'vuex'
   import Nav from '@/components/viewer/Nav'
+  import Gallary from '@/components/viewer/Gallary'
 
   export default {
     name: 'Viewer',
-    components: { Nav },
+    components: { Nav, Gallary },
     data() {
-      return {}
+      return {
+        images: [
+          '/static/test/69108255_p0.jpg',
+          '/static/test/6428005_p0.png',
+          '/static/test/46713305_p0.png'
+        ],
+        options: {
+          index: 0
+        }
+      }
     },
     methods: {
       open (link) {
@@ -41,6 +51,8 @@
     grid-template-columns 50px 1fr 50px
     justify-content center
     .sc-viewer-main
-      grid-column 2 / 3
+      grid-column 1 / 4
+      grid-row 2 / 3
+      overflow auto
       
 </style>

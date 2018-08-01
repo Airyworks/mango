@@ -37,7 +37,7 @@
       const time = new Date()
       const treeData = scanner('D:/Dev/scarlet/src/renderer/components')
       console.log(new Date().getTime() - time.getTime())
-      console.log(treeData)
+      treeData[0].state = { expanded: true }
       treeData[0].data = {
         isFile: true,
         extension: '.jpg'
