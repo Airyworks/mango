@@ -1,6 +1,6 @@
 module.exports = {
   process: 0,
-  sort: 0, // 0: 001.png -> 100.png; 1 100.png -> 001.png
+  sort: 1, // 1: 001.png -> 100.png; 2 100.png -> 001.png; NO zero
   // or array
   label: [],
   data: {
