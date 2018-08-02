@@ -5,15 +5,18 @@
         :options="treeOptions"
         ref="tree"
     >
-      <span class="tree-text" slot-scope="{ node }">
-        <template v-if="!node.hasChildren()">
-          <MdStarIcon w="10px" h="10px"/>
+      <span class="sc-tree-text" slot-scope="{ node }"
+        :before-init-node="node.data.fileType = testExtension(node.data.extension)">
+        <template v-if="node.data.isFile">
+          <mu-icon value="photo" class="sc-filetree-icon" v-if="node.data.fileType == 'img'"></mu-icon>
+          <mu-icon value="videocam" class="sc-filetree-icon" v-if="node.data.fileType == 'video'"></mu-icon>
+          <mu-icon value="insert_drive_file" class="sc-filetree-icon" v-if="node.data.fileType == 'other'"></mu-icon>
           {{ node.text }}
         </template>
 
         <template v-else>
-          <IosFolderOpenIcon w="10px" h="10px" v-show="node.expanded()"/>
-          <MdFolderIcon w="10px" h="10px" v-show="!node.expanded()"/>
+          <mu-icon value="keyboard_arrow_down" class="sc-filetree-icon" v-show="node.expanded()"></mu-icon>
+          <mu-icon value="keyboard_arrow_right" class="sc-filetree-icon" v-show="!node.expanded()"></mu-icon>
           {{ node.text }}
         </template>
       </span>
@@ -22,18 +25,23 @@
 </template>
 
 <script>
-  import MdFolderIcon from 'vue-ionicons/dist/md-folder'
-  import IosFolderOpenIcon from 'vue-ionicons/dist/ios-folder-open'
-  import MdStarIcon from 'vue-ionicons/dist/md-star'
+  const extensionRule = {
+    'video': ['.jpg', '.jpeg', '.png'],
+    'video1': ['.mp4', '.avi', '.flv']
+  }
 
   export default {
     name: 'Filetree',
-    components: { MdFolderIcon, IosFolderOpenIcon, MdStarIcon },
     data () {
       const scanner = require('../../data/filetree/util').scanDir
       const time = new Date()
-      const treeData = scanner('')
+      const treeData = scanner('D:/Dev/scarlet/src/renderer/components')
       console.log(new Date().getTime() - time.getTime())
+      treeData[0].state = { expanded: true }
+      treeData[0].data = {
+        isFile: true,
+        extension: '.jpg'
+      }
       return {
         treeOptions: {
           paddingLeft: 10
@@ -76,6 +84,13 @@
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
+      },
+      testExtension(ext) {
+        if (!ext) return 'other'
+        for (let t in extensionRule) {
+          if (extensionRule[t].indexOf(ext) >= 0) return t
+        }
+        return 'other'
       }
     }
   }
@@ -86,4 +101,6 @@
   width 200px
   .tree
     height 100vh
+  .sc-filetree-icon
+    font-size 10px
 </style>

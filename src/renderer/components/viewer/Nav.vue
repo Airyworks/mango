@@ -1,7 +1,7 @@
 <template>
   <div class="sc-nav" name="nav">
     <div class="sc-nav-back" @click="back">
-      <IosArrowBackIcon h="60px" w="20px"/>
+      <mu-icon class="sc-nav-icon" value="keyboard_arrow_left"></mu-icon>
     </div>
     <div class="sc-nav-title-container">
       <mu-tooltip content="提示信息">
@@ -10,24 +10,24 @@
     </div>
     <div class="sc-nav-title-actions">
       <mu-button class="sc-nav-title-button" ref="button" small color="primary" @click="open = !open">
-        <IosMoreIcon h="60px" w="20px"/>
+        <mu-icon class="sc-nav-icon" value="more_horiz"></mu-icon>
       </mu-button>
       
       <mu-popover cover :open.sync="open" :trigger="trigger" placement="bottom-end">
         <mu-list>
           <mu-list-item button class="sc-n xv-title-more-btn" ref="copy" @click="copyTitle">
-              <mu-list-item-title>
-                <IosCopyIcon h="26px" w="16px"/>
-              </mu-list-item-title>
-          </mu-list-item>
-          <mu-list-item button class="sc-nav-title-more-btn">
             <mu-list-item-title>
-              <MdStarOutlineIcon h="26px" w="20px"/>
+              <mu-icon class="sc-nav-ionicons" value=":ion ion-md-copy"></mu-icon>
             </mu-list-item-title>
           </mu-list-item>
           <mu-list-item button class="sc-nav-title-more-btn">
             <mu-list-item-title>
-              <IosTrash h="26px" w="20px"/>
+              <mu-icon value="star_border"></mu-icon>
+            </mu-list-item-title>
+          </mu-list-item>
+          <mu-list-item button class="sc-nav-title-more-btn">
+            <mu-list-item-title>
+              <mu-icon value="delete_forever"></mu-icon>
             </mu-list-item-title>
           </mu-list-item>
         </mu-list>
@@ -37,26 +37,10 @@
 </template>
 
 <script>
-  import IosArrowBackIcon from 'vue-ionicons/dist/ios-arrow-back'
-  import IosMoreIcon from 'vue-ionicons/dist/ios-more.vue'
-  import MdMoreIcon from 'vue-ionicons/dist/md-more.vue'
-  import MdStarOutlineIcon from 'vue-ionicons/dist/md-star-outline.vue'
-  import IosTrash from 'vue-ionicons/dist/ios-trash.vue'
-  import MdCopyIcon from 'vue-ionicons/dist/md-copy.vue'
-  import IosCopyIcon from 'vue-ionicons/dist/ios-copy.vue'
   import { clipboard } from 'electron'
 
   export default {
     name: 'Nav',
-    components: {
-      IosArrowBackIcon,
-      IosMoreIcon,
-      MdMoreIcon,
-      MdStarOutlineIcon,
-      IosTrash,
-      MdCopyIcon,
-      IosCopyIcon
-    },
     data() {
       return {
         open: false,
@@ -97,6 +81,9 @@
     display grid
     grid-template-columns $nav-button-width 1fr $nav-button-width
     justify-content center
+    .sc-nav-icon
+      font-size 30px
+      line-height 60px
     .sc-nav-back
       width $nav-button-width
       height $nav-height
@@ -128,10 +115,11 @@
   .mu-list
     padding 0
     background-color #fff
-    .sc-nav-title-more-btn
-      .mu-item
-        height 52px
-        .mu-item-title
-          text-align right
+    .mu-item
+      height 52px
+      .mu-item-title
+        text-align center
+        .sc-nav-ionicons
+          font-size 22px
       
 </style>
