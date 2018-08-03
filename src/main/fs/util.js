@@ -33,7 +33,7 @@ function findCover(dir) {
   const files = fs.readdirSync(dir)
   for (const v of files) {
     const realPath = path.join(dir, v)
-    if (!isDirectory(realPath) && imageExt.find(path.extname(v))) {
+    if (!isDirectory(realPath) && imageExt.find(x => x === path.extname(v))) {
       return realPath
     }
   }
