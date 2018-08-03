@@ -26,59 +26,73 @@
 
 <script>
   const extensionRule = {
-    'video': ['.jpg', '.jpeg', '.png'],
-    'video1': ['.mp4', '.avi', '.flv']
+    'img': ['.jpg', '.jpeg', '.png'],
+    'video': ['.mp4', '.avi', '.flv']
   }
 
   export default {
     name: 'Filetree',
     data () {
-      const scanner = require('../../data/filetree/util').scanDir
+      const filetree = require('../../data/filetree/')
       const time = new Date()
-      const treeData = scanner('D:/Dev/scarlet/src/renderer/components')
-      console.log(new Date().getTime() - time.getTime())
-      treeData[0].state = { expanded: true }
-      treeData[0].data = {
-        isFile: true,
-        extension: '.jpg'
-      }
+      const root = 'D:/Dev/scarlet/src'
+      filetree.addRoot(root)
+      console.log(new Date().getTime() - time.getTime(), filetree.roots, filetree.tree)
+      // treeData[0].state = { expanded: true }
+      // treeData[0].data = {
+      //   isFile: true,
+      //   extension: '.jpg'
+      // }
+      console.log(this.$store)
       return {
         treeOptions: {
-          paddingLeft: 10
+          paddingLeft: 10,
+          store: {
+            store: this.$store,
+            key: 'Filetree.treeData',
+            mutations: ['initTree', 'updateTree']
+          }
         },
-        treeData
-        // treeData: [
-        //   {
-        //     text: 'Disc C:',
-        //     state: { expanded: true },
-        //     children: [
-        //       { text: 'PerfLogs' },
-        //       { text: 'Users',
-        //         children: [
-        //           { text: 'User 1' },
-        //           { text: 'User 2' },
-        //           { text: 'User 3' }
-        //         ]},
-        //       { text: 'tomcat' },
-        //       { text: 'sysCache' },
-        //       { text: 'Program Files',
-        //         children: [
-        //           { text: 'Intel' },
-        //           { text: 'Internet Explorer' },
-        //           { text: 'Opera' },
-        //           {
-        //             text: 'Oracle',
-        //             children: [
-        //               { text: 'Intel' },
-        //               { text: 'Internet Explorer' },
-        //               { text: 'Opera' },
-        //               { text: 'Oracle' }
-        //             ]
-        //           }
-        //         ]}
-        //     ]
+        // treeOptions: {
+        //   paddingLeft: 10,
+        //   fetchData(node) {
+        //     console.log(node)
+        //     return `/assets/data/fetch0/data-${node.id}.json`
         //   }
-        // ]
+        // },
+        // treeData: filetree.tree[0]
+        treeData: [
+          {
+            text: 'Disc C:',
+            state: { expanded: true },
+            children: [
+              { text: 'PerfLogs' },
+              { text: 'Users',
+                children: [
+                  { text: 'User 1' },
+                  { text: 'User 2' },
+                  { text: 'User 3' }
+                ]},
+              { text: 'tomcat' },
+              { text: 'sysCache' },
+              { text: 'Program Files',
+                children: [
+                  { text: 'Intel' },
+                  { text: 'Internet Explorer' },
+                  { text: 'Opera' },
+                  {
+                    text: 'Oracle',
+                    children: [
+                      { text: 'Intel' },
+                      { text: 'Internet Explorer' },
+                      { text: 'Opera' },
+                      { text: 'Oracle' }
+                    ]
+                  }
+                ]}
+            ]
+          }
+        ]
       }
     },
     methods: {
