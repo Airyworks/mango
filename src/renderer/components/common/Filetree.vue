@@ -6,6 +6,7 @@
         ref="tree"
     >
       <span class="sc-tree-text" slot-scope="{ node }"
+        @mouseup.stop="updateTree(node)"
         :before-init-node="node.data.fileType = testExtension(node.data.extension)">
         <template v-if="node.data.isFile">
           <mu-icon value="photo" class="sc-filetree-icon" v-if="node.data.fileType == 'img'"></mu-icon>
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   const extensionRule = {
     'img': ['.jpg', '.jpeg', '.png'],
     'video': ['.mp4', '.avi', '.flv']
@@ -33,26 +35,17 @@
   export default {
     name: 'Filetree',
     data () {
-      const filetree = require('../../data/filetree/')
-      const time = new Date()
-      const root = 'D:/Dev/scarlet/src'
-      filetree.addRoot(root)
-      console.log(new Date().getTime() - time.getTime(), filetree.roots, filetree.tree)
-      // treeData[0].state = { expanded: true }
-      // treeData[0].data = {
-      //   isFile: true,
-      //   extension: '.jpg'
-      // }
-      console.log(this.$store)
       return {
+        events: [],
         treeOptions: {
           paddingLeft: 10,
           store: {
             store: this.$store,
-            key: 'Filetree.treeData',
-            mutations: ['initTree', 'updateTree']
+            getter: 'tree'
+            // mutations: [...mapMutations(['initTree', 'updateTree'])]
           }
         },
+        treeData: []
         // treeOptions: {
         //   paddingLeft: 10,
         //   fetchData(node) {
@@ -61,38 +54,43 @@
         //   }
         // },
         // treeData: filetree.tree[0]
-        treeData: [
-          {
-            text: 'Disc C:',
-            state: { expanded: true },
-            children: [
-              { text: 'PerfLogs' },
-              { text: 'Users',
-                children: [
-                  { text: 'User 1' },
-                  { text: 'User 2' },
-                  { text: 'User 3' }
-                ]},
-              { text: 'tomcat' },
-              { text: 'sysCache' },
-              { text: 'Program Files',
-                children: [
-                  { text: 'Intel' },
-                  { text: 'Internet Explorer' },
-                  { text: 'Opera' },
-                  {
-                    text: 'Oracle',
-                    children: [
-                      { text: 'Intel' },
-                      { text: 'Internet Explorer' },
-                      { text: 'Opera' },
-                      { text: 'Oracle' }
-                    ]
-                  }
-                ]}
-            ]
-          }
-        ]
+        // treeData: [
+        //   {
+        //     text: 'Disc C:',
+        //     state: { expanded: true },
+        //     children: [
+        //       { text: 'PerfLogs' },
+        //       { text: 'Users',
+        //         children: [
+        //           { text: 'User 1' },
+        //           { text: 'User 2' },
+        //           { text: 'User 3' }
+        //         ]},
+        //       { text: 'tomcat' },
+        //       { text: 'sysCache' },
+        //       { text: 'Program Files',
+        //         children: [
+        //           { text: 'Intel' },
+        //           { text: 'Internet Explorer' },
+        //           { text: 'Opera' },
+        //           {
+        //             text: 'Oracle',
+        //             children: [
+        //               { text: 'Intel' },
+        //               { text: 'Internet Explorer' },
+        //               { text: 'Opera' },
+        //               { text: 'Oracle' }
+        //             ]
+        //           }
+        //         ]}
+        //     ]
+        //   }
+        // ]
+      }
+    },
+    computed: {
+      eventsList() {
+        return this.events.concat().reverse()
       }
     },
     methods: {
@@ -105,7 +103,20 @@
           if (extensionRule[t].indexOf(ext) >= 0) return t
         }
         return 'other'
-      }
+      },
+      ...mapMutations(['initTree', 'updateTree'])
+    },
+    mounted() {
+      // this.updateTree([{text: 'hello'}])
+      // eventsList.forEach(e => {
+      //   this.$refs.tree.$on(e.name, this.initEventViewer(e))
+      // })
+      this.$refs.tree.$on('tree:mounted', e => {
+        this.initTree(e.data)
+      })
+      // this.$refs.tree.$on('node:expanded', e => {
+      //   console.log(e)
+      // })
     }
   }
 </script>
