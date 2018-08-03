@@ -126,7 +126,7 @@ module.exports = {
   },
   addRoot(root) {
     require('../repository/root').insertRoot(root)
-    if (!roots.find(root) &&
+    if (!roots.find(v => v === root) &&
         isExists(root) &&
         isDirectory(root)) {
       roots.push(root)
