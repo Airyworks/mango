@@ -8,9 +8,6 @@ const findCover = require('electron').remote.require('./fs').util.findCover
 const absolutePath = require('./util').absolutePath
 const rootDisplayPath = path.basename
 
-let tree = []
-let roots = []
-
 function scanChildren(node) {
   const children = scanDir(absolutePath(node))
   children.forEach((value, index, arr) => {
@@ -53,16 +50,20 @@ function refreshCover(node) {
   }
 }
 
-module.exports = {
+module.exports = new class Filetree {
+  constructor() {
+    this.tree = []
+    this.roots = []
+  }
   forceReload() {
     const newTree = []
-    roots = require('../repository/root').getRoots()
+    this.roots = require('../repository/root').getRoots()
     // TODO: add magnet dir to roots
 
     // if missing, ignore(do NOT write back to db)
-    roots = roots.filter(dir => isExists(dir) && isDirectory(dir))
+    this.roots = this.roots.filter(dir => isExists(dir) && isDirectory(dir))
 
-    for (const root of roots) {
+    for (const root of this.roots) {
       newTree.push({
         text: rootDisplayPath(root),
         root,
@@ -73,7 +74,7 @@ module.exports = {
         children: []
       })
     }
-    for (const root of tree) {
+    for (const root of this.tree) {
       const newRoot = newTree.find(v => v.root === root.root)
       if (newRoot) {
         if (root.expanded) {
@@ -82,12 +83,12 @@ module.exports = {
         }
       }
     }
-    tree = newTree
+    this.tree = newTree
 
-    for (const node of tree) {
+    for (const node of this.tree) {
       refreshCover(node)
     }
-  },
+  }
   open(node) {
     if (node.isFile) {
       return
@@ -120,20 +121,22 @@ module.exports = {
         child.image = findCover(absolutePath(child))
       }
     }
-  },
+  }
   close(node) {
     if (node.isFile) {
       return
     }
     node.expanded = false
-  },
+  }
   addRoot(root) {
     require('../repository/root').insertRoot(root)
-    if (!roots.find(v => v === root) &&
+    if (!this.roots.find(v => v === root) &&
         isExists(root) &&
         isDirectory(root)) {
-      roots.push(root)
-      tree.push({
+      console.log(this.roots)
+      this.roots.push(root)
+      console.log(this.roots)
+      this.tree.push({
         text: rootDisplayPath(root),
         root,
         image: undefined,
@@ -143,14 +146,12 @@ module.exports = {
         children: []
       })
     }
-  },
+  }
   delRoot(root) {
     require('../repository/root').delRoot(root)
-    roots = roots.filter(v => v !== root)
-    if (tree.find(v => v.root === root)) {
-      tree = tree.filter(v => v.root === root)
+    this.roots = this.roots.filter(v => v !== root)
+    if (this.tree.find(v => v.root === root)) {
+      this.tree = this.tree.filter(v => v.root === root)
     }
-  },
-  tree,
-  roots
-}
+  }
+}()
