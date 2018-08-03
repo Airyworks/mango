@@ -6,7 +6,16 @@ const rangeTail = 4
 module.exports = new class Loader {
   constructor() {
     this.queue = []
-    this.promise = undefined
+    this.promise = Promise.resolve()
+    this.isLoading = false
+  }
+
+  nextBeLoaded() {
+    const item = this.queue.find(i => i.active)
+    if (!item) {
+      this.isLoading = false
+      return false
+    }
   }
 
   loop() {
@@ -15,7 +24,7 @@ module.exports = new class Loader {
 
   }
 
-  loadBook(book, indexes) {
+  loadBook(book, indices) {
     const nodePath = book.absolute
     if (this.queue.find(v => v.path === nodePath)) {
       return
@@ -23,7 +32,7 @@ module.exports = new class Loader {
     const item = {
       path: nodePath,
       data: {},
-      loadIndex: indexes,
+      loadIndex: indices,
       complete: false,
       active: true
     }
@@ -31,14 +40,23 @@ module.exports = new class Loader {
       item.data[v] = undefined
     })
     this.queue.push(item)
+
+    if (!this.isLoading) {
+      this.loop()
+    }
   }
 
-  updateIndexes(book, indexes) {
+  // if user change {process}, NEED to fetch
+  // new indices
+  updateindices(book, indices) {
     const item = this.queue.find(v => v.path === book.absolute)
     if (!item) {
       return
     }
-    item.loadIndex = indexes.filter(v => item.loadIndex.find(x => x === v))
+    item.loadIndex = indices.filter(v => item.loadIndex.find(x => x === v))
+    if (!this.isLoading) {
+      this.loop()
+    }
   }
 
   stopLoadBook(book) {
@@ -55,6 +73,9 @@ module.exports = new class Loader {
       return false
     }
     item.active = true
+    if (!this.isLoading) {
+      this.loop()
+    }
   }
 
   stopLoadAll() {
@@ -63,6 +84,9 @@ module.exports = new class Loader {
 
   resumeLoadAll() {
     this.queue.forEach(v => { v.active = true })
+    if (!this.isLoading) {
+      this.loop()
+    }
   }
 
   removeBookCache(book) {
