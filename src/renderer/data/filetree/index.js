@@ -57,6 +57,7 @@ module.exports = {
   forceReload() {
     const newTree = []
     roots = require('../repository/root').getRoots()
+    // TODO: add magnet dir to roots
 
     // if missing, ignore(do NOT write back to db)
     roots = roots.filter(dir => isExists(dir) && isDirectory(dir))
