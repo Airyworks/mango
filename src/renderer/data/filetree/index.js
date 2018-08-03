@@ -83,7 +83,9 @@ module.exports = {
     }
     tree = newTree
 
-    refreshCover(tree)
+    for (const node of tree) {
+      refreshCover(node)
+    }
   },
   open(node) {
     if (node.isFile) {
