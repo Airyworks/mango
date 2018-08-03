@@ -6,7 +6,6 @@
         ref="tree"
     >
       <span class="sc-tree-text" slot-scope="{ node }"
-        @mouseup.stop="updateTree(node)"
         :before-init-node="node.data.fileType = testExtension(node.data.extension)">
         <template v-if="node.data.isFile">
           <mu-icon value="photo" class="sc-filetree-icon" v-if="node.data.fileType == 'img'"></mu-icon>
@@ -114,9 +113,9 @@
       this.$refs.tree.$on('tree:mounted', e => {
         this.initTree(e.data)
       })
-      // this.$refs.tree.$on('node:expanded', e => {
-      //   console.log(e)
-      // })
+      this.$refs.tree.$on('node:selected', e => {
+        this.updateTree(e)
+      })
     }
   }
 </script>
