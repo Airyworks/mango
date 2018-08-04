@@ -1,16 +1,46 @@
 <template>
-  <div id="app">
+  <div id="app" @click="coreValuePopup">
     <FileTree/>
     <router-view></router-view>
+    <div v-if="enableCoreValue" ref="core-value"></div>
   </div>
 </template>
 
 <script>
   import FileTree from '@/components/common/Filetree'
 
+  const coreValueList = ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '奶子']
+
   export default {
     name: 'Scarlet',
-    components: { FileTree }
+    components: { FileTree },
+    data() {
+      return {
+        enableCoreValue: true,
+        coreIndex: 0
+      }
+    },
+    methods: {
+      coreValuePopup(e) {
+        if (!this.enableCoreValue) {
+          return false
+        } else {
+          const eleText = document.createElement('span')
+          eleText.className = 'core-value-text-popup'
+          this.$refs['core-value'].appendChild(eleText)
+          if (!coreValueList[this.coreIndex]) {
+            this.coreIndex = 0
+          }
+          eleText.innerHTML = coreValueList[this.coreIndex]
+          eleText.addEventListener('animationend', function () {
+            eleText.parentNode.removeChild(eleText)
+          })
+          eleText.style.left = (e.clientX - eleText.clientWidth / 2) + 'px'
+          eleText.style.top = (e.clientY - eleText.clientHeight) + 'px'
+          this.coreIndex++
+        }
+      }
+    }
   }
 </script>
 
@@ -61,4 +91,20 @@
     background-color transparent
   .tree-anchor
     padding 3px 2px
+
+.core-value-text-popup
+  animation: core-value-textPopup 1s
+  color: red
+  user-select: none
+  white-space: nowrap
+  position: absolute
+  z-index: 99
+
+@keyframes core-value-textPopup
+  0%, 100%
+    opacity: 0
+  5%
+    opacity: 1
+  100%
+    transform: translateY(-50px)
 </style>

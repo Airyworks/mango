@@ -1,4 +1,3 @@
-// const path = require('path')
 const filetree = require('../../data/filetree/')
 
 const root = 'C:\\Users\\lwhcv\\Documents\\Workspace\\scarlet'
@@ -15,7 +14,8 @@ function modNode(node) {
   node.data = {
     root: node.root,
     name: node.text,
-    isFile: node.isFile
+    isFile: node.isFile,
+    origin: node
   }
   return node
 }
@@ -31,9 +31,10 @@ const mutations = {
   updateTree(state, node) {
     if (node.data.isFile) {
       // do nothing with file
+      return true
     } else {
       // const subFolder = path.join(node.data.root, node.data.name)
-      // filetree.addRoot(subFolder)
+      // console.log(subFolder)
       filetree.open(node.data.origin)
       console.log(filetree.tree)
     }
