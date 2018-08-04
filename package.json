@@ -27,6 +27,8 @@
     "axios": "^0.16.1",
     "electron-forge": "^5.2.2",
     "ionicons": "^4.2.5",
+    "koa-static": "^5.0.0",
+    "koa2": "^2.0.0-alpha.7",
     "liquor-tree": "^0.2.30",
     "lowdb": "^1.0.0",
     "material-icons": "^0.2.3",

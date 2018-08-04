@@ -8,6 +8,7 @@ import 'ionicons/dist/scss/ionicons.scss'
 import App from './App'
 import router from './router'
 import store from './store'
+require('./data/server')
 
 Vue.use(VueTree)
 Vue.use(MuseUI)
