@@ -104,10 +104,16 @@ module.exports = new class Filetree {
       )
     )
     const append = children.filter(
-      v => node.children.find(
-        k => k.text !== v.text || k.isFile !== v.isFile
-      )
+      v => {
+        for (const i of node.children) {
+          if (i.text === v.text && i.isFile === v.isFile) {
+            return false
+          }
+        }
+        return true
+      }
     )
+    console.log(children, reserve, append)
     node.children = reserve.concat(append)
 
     // load cover
@@ -129,13 +135,13 @@ module.exports = new class Filetree {
     node.expanded = false
   }
   addRoot(root) {
+    // TODO: avoid new root contains or is contained by
+    // an available root
     require('../repository/root').insertRoot(root)
     if (!this.roots.find(v => v === root) &&
         isExists(root) &&
         isDirectory(root)) {
-      console.log(this.roots)
       this.roots.push(root)
-      console.log(this.roots)
       this.tree.push({
         text: rootDisplayPath(root),
         root,

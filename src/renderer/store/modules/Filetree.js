@@ -1,12 +1,12 @@
-const path = require('path')
+// const path = require('path')
 const filetree = require('../../data/filetree/')
 
-const root = 'D:/Dev/scarlet/src'
+const root = 'C:\\Users\\lwhcv\\Documents\\Workspace\\scarlet'
 
-filetree.forceReload()
 function loadRoot(path) {
   filetree.addRoot(path)
   const rootNode = filetree.tree.find(v => v.root === path)
+  filetree.open(rootNode)
   console.log(path, rootNode, filetree.roots, filetree.tree)
   return rootNode
 }
@@ -31,10 +31,11 @@ const mutations = {
   updateTree(state, node) {
     if (node.data.isFile) {
       // do nothing with file
-      return
     } else {
-      const subFolder = path.join(node.data.root, node.data.name)
-      filetree.addRoot(subFolder)
+      // const subFolder = path.join(node.data.root, node.data.name)
+      // filetree.addRoot(subFolder)
+      filetree.open(node.data.origin)
+      console.log(filetree.tree)
     }
   }
 }
