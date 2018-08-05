@@ -1,7 +1,6 @@
 <template>
   <div class="sc-filetree">
     <tree
-        :data="treeData"
         :options="treeOptions"
         ref="tree"
     >
@@ -40,11 +39,10 @@
           paddingLeft: 10,
           store: {
             store: this.$store,
-            getter: 'tree'
+            getter: 'getTree'
             // mutations: [...mapMutations(['initTree', 'updateTree'])]
           }
-        },
-        treeData: []
+        }
         // treeOptions: {
         //   paddingLeft: 10,
         //   fetchData(node) {
@@ -113,8 +111,12 @@
       this.$refs.tree.$on('tree:mounted', e => {
         this.initTree(e.data)
       })
-      this.$refs.tree.$on('node:selected', e => {
+      this.$refs.tree.$on('node:expanded', e => {
+        console.log('node:expanded', e.data.text)
         this.updateTree(e)
+      })
+      this.$refs.tree.$on('node:selected', e => {
+        console.log('node:selected', e.data.text)
       })
     }
   }

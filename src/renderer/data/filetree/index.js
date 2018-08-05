@@ -89,7 +89,8 @@ module.exports = new class Filetree {
       refreshCover(node)
     }
   }
-  open(node) {
+  openNode(node, modNode) {
+    console.log(node)
     if (node.isFile) {
       return
     }
@@ -113,7 +114,9 @@ module.exports = new class Filetree {
         return true
       }
     )
-    console.log(children, reserve, append)
+
+    console.log(node.root, node.text, append)
+
     node.children = reserve.concat(append)
 
     // load cover
