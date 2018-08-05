@@ -1,11 +1,11 @@
 const path = require('path')
 
 function relativePath(node) {
-  if (!node.father) {
+  if (!node.parent) {
     // this node is root
     return ''
   } else {
-    return path.join(relativePath, node.text)
+    return path.join(relativePath(node.parent), node.text)
   }
 }
 

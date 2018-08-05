@@ -90,7 +90,6 @@ module.exports = new class Filetree {
     }
   }
   openNode(node, modNode) {
-    console.log(node)
     if (node.isFile) {
       return
     }
@@ -114,8 +113,6 @@ module.exports = new class Filetree {
         return true
       }
     )
-
-    console.log(node.root, node.text, append)
 
     node.children = reserve.concat(append)
 
