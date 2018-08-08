@@ -88,7 +88,7 @@ export const filetree = new class Filetree {
       refreshCover(node)
     }
   }
-  openNode(node, modNode) {
+  openNode(node) {
     if (node.isFile) {
       return
     }
