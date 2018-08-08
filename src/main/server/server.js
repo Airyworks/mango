@@ -12,7 +12,7 @@ process.on('message', msg => {
       for (const root of roots) {
         app.use(require('koa-static')(root))
       }
-      server = app.listen(3000)
+      server = app.listen(12346)
       break
     case 'is-server-listening':
       process.send(server.listening)
