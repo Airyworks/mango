@@ -1,5 +1,4 @@
 const path = require('path')
-
 const scanDir = require('electron').remote.require('./fs').util.scanDir
 const isExists = require('electron').remote.require('./fs').util.isExists
 const isDirectory = require('electron').remote.require('./fs').util.isDirectory
@@ -50,7 +49,7 @@ function refreshCover(node) {
   }
 }
 
-module.exports = new class Filetree {
+export const filetree = new class Filetree {
   constructor() {
     this.tree = []
     this.roots = []

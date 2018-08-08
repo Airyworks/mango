@@ -14,11 +14,11 @@ const fs = require('fs')
 //   }
 // }
 
-// module.exports = (files) => {
+// export default (files) => {
 //   return genLoader(files)
 // }
 
-module.exports = file => new Promise((resolve, reject) => {
+export const readFile = file => new Promise((resolve, reject) => {
   fs.readFile(file, (err, data) => {
     if (err) {
       reject(err)

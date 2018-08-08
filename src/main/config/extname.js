@@ -1,4 +1,2 @@
-module.exports = {
-  image: ['.png', '.jpg', '.jpeg', '.gif'],
-  video: ['.avi', '.wmv', '.mpeg', '.mp4']
-}
+export const image = ['.png', '.jpg', '.jpeg', '.gif']
+export const video = ['.avi', '.wmv', '.mpeg', '.mp4']

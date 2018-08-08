@@ -1,2 +1,2 @@
 export const global = require('./global')
-export const local = require('./local')
+export const local = require('./local').local

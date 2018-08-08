@@ -1,4 +1,4 @@
-const filetree = require('../../data/filetree/')
+const filetree = require('../../data/filetree/').filetree
 
 const root = 'D:\\Dev\\scarlet'
 

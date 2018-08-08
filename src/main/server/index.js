@@ -1,6 +1,6 @@
 const childProcess = require('child_process')
 const path = require('path')
-module.exports = new class {
+export const server = new class {
   constructor() {
     this.child = null
   }

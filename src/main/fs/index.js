@@ -1,5 +1,3 @@
 require('./event')
-module.exports = {
-  util: require('./util'),
-  loader: require('./loader')
-}
+export const util = require('./util')
+export const loader = require('./loader').readFile

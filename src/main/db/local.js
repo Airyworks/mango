@@ -3,7 +3,7 @@ const path = require('path')
 const FileSync = require('lowdb/adapters/FileSync')
 const localDefault = require('../config/local.default.js')
 
-module.exports = (folderPath) => {
+export const local = (folderPath) => {
   const realPath = path.join(folderPath, '.scarlet.json')
   // if win platform, add hidden attr
 

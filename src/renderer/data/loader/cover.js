@@ -2,7 +2,7 @@ const findCover = require('electron').remote.require('./fs').util.findCover
 const fsLoader = require('electron').remote.require('./fs').loader
 
 // donot need to stop loading
-module.exports = new class CoverLoader {
+export const coverLoader = new class CoverLoader {
   constructor() {
     // { path: "C:\\xxx", data: Buffer|undefined }
     this.queue = []

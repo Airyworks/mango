@@ -1,10 +1,8 @@
 const db = require('electron').remote.require('./db').global.configDb
 
-module.exports = {
-  getSetting(str) {
-    return db.get(str).value()
-  },
-  setSetting(str, value) {
-    db.set(str, value).write()
-  }
+export function getSetting(str) {
+  return db.get(str).value()
+}
+export function setSetting(str, value) {
+  db.set(str, value).write()
 }

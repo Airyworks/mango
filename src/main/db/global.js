@@ -13,12 +13,7 @@ global['storePath'] = storePath
 
 const FileSync = require('lowdb/adapters/FileSync')
 
-const configDb = low(new FileSync(configPath, { defaultValue: globalDefault }))
+export const configDb = low(new FileSync(configPath, { defaultValue: globalDefault }))
 configDb.write()
-const storeDb = low(new FileSync(storePath, { defaultValue: storeDefault }))
+export const storeDb = low(new FileSync(storePath, { defaultValue: storeDefault }))
 storeDb.write()
-
-module.exports = {
-  configDb,
-  storeDb
-}

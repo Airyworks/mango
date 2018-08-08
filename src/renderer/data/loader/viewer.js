@@ -1,7 +1,7 @@
 const path = require('path')
 const fsLoader = require('electron').remote.require('./fs').loader
 
-module.exports = new class ViewLoader {
+export const viewLoader = new class ViewLoader {
   constructor() {
     this.queue = []
     this.isLoading = false

@@ -3,7 +3,7 @@ const path = require('path')
 const imageExt = require('../config/extname').image
 
 // use recursive will spend too much time
-function scanDir(dir, recursive = false) {
+export function scanDir(dir, recursive = false) {
   const tree = []
   if (fs.existsSync(dir)) {
     const items = fs.readdirSync(dir)
@@ -29,7 +29,7 @@ function scanDir(dir, recursive = false) {
 
 // find the cover image in a folder
 // return absolute path to the image/ or undefined
-function findCover(dir) {
+export function findCover(dir) {
   const files = fs.readdirSync(dir)
   for (const v of files) {
     const realPath = path.join(dir, v)
@@ -40,7 +40,7 @@ function findCover(dir) {
   return undefined
 }
 
-function isImage(dir) {
+export function isImage(dir) {
   if (!isExists(dir) || isDirectory(dir)) {
     return false
   } else {
@@ -48,19 +48,11 @@ function isImage(dir) {
   }
 }
 
-function isExists(dir) {
+export function isExists(dir) {
   return fs.existsSync(dir)
 }
 
-function isDirectory(dir) {
+export function isDirectory(dir) {
   const stats = fs.statSync(dir)
   return stats.isDirectory()
-}
-
-module.exports = {
-  scanDir,
-  isImage,
-  isExists,
-  isDirectory,
-  findCover
 }

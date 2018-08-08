@@ -1,5 +1,5 @@
 const getAbsPath = require('../filetree/util').absolutePath
-const fileRepoProv = require('../repository/file')
+const fileRepoProv = require('../repository/file').file
 const path = require('path')
 const scanDir = require('electron').remote.require('./fs').util.scanDir
 const checkIfImage = require('electron').remote.require('./fs').util.isImage
@@ -32,7 +32,7 @@ function transSortFunc(sort) {
   }
 }
 
-module.exports = class Book {
+export class Book {
   constructor(node) {
     this.node = node
     this.absolute = getAbsPath(node)
