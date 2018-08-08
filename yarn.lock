@@ -5393,9 +5393,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-liquor-tree@^0.2.30:
-  version "0.2.30"
-  resolved "http://registry.npm.taobao.org/liquor-tree/download/liquor-tree-0.2.30.tgz#08b4534209caea593990e928cd23527e8a316f66"
+liquor-tree@^0.2.32:
+  version "0.2.32"
+  resolved "http://registry.npm.taobao.org/liquor-tree/download/liquor-tree-0.2.32.tgz#e2ad120fcc4dc91daad9dac0289ba92a2896095b"
 
 load-ip-set@^2.1.0:
   version "2.1.0"
