@@ -19,7 +19,8 @@ const vueLoaderConfig = require('./vue-loader.conf')
  * that provide pure *.vue files that need compiling
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/webpack-configurations.html#white-listing-externals
  */
-let whiteListedModules = ['vue', 'vuex', 'vue-electron', 'vue-router', 'axios', 'liquor-tree', 'muse-ui']
+let whiteListedModules = ['vue', 'vuex', 'vue-electron', 'vue-router', 'axios',
+  'liquor-tree', 'muse-ui', 'vue-concise-slider']
 
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',

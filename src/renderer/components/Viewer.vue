@@ -2,7 +2,7 @@
   <div class="sc-viewer" name="viewer">
     <Nav :msg="reading.title"/>
     <div class="sc-viewer-main">
-      <Gallary :images="images"/>
+      <Gallery :images="images"/>
     </div>
   </div>
 </template>
@@ -10,11 +10,11 @@
 <script>
   import { mapState } from 'vuex'
   import Nav from '@/components/viewer/Nav'
-  import Gallary from '@/components/viewer/Gallary'
+  import Gallery from '@/components/viewer/Gallery'
 
   export default {
     name: 'Viewer',
-    components: { Nav, Gallary },
+    components: { Nav, Gallery },
     data() {
       return {
         images: [
