@@ -1,2 +1,1 @@
-const server = require('electron').remote.require('./server').server
-window.server = server
+export const server = require('electron').remote.require('scarlet-server').server

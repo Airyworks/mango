@@ -8,14 +8,13 @@ const webpack = require('webpack')
 
 const BabiliWebpackPlugin = require('babili-webpack-plugin')
 
-let whiteListedModules = ['lowdb']
+let whiteListedModules = ['lowdb', 'scarlet-server', 'webtorrent']
 
 let mainConfig = {
   entry: {
     main: path.join(__dirname, '../src/main/index.js'),
     db: path.join(__dirname, '../src/main/db/'),
-    fs: path.join(__dirname, '../src/main/fs/'),
-    server: path.join(__dirname, '../src/main/server/')
+    fs: path.join(__dirname, '../src/main/fs/')
   },
   externals: [
     ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
