@@ -4,7 +4,7 @@
       <mu-icon class="sc-nav-icon" value="keyboard_arrow_left"></mu-icon>
     </div>
     <div class="sc-nav-title-container">
-      <mu-tooltip content="提示信息">
+      <mu-tooltip :content="msgAlt">
         <p class="sc-nav-title">{{ msg || msgPlaceholder }}</p>
       </mu-tooltip>
     </div>
@@ -45,7 +45,8 @@
       return {
         open: false,
         trigger: null,
-        msgPlaceholder: '自宅突撃イキなりギンギン伝説 嗜虐幻想郷 この素晴らしいパーティーにも祝福を'
+        msgPlaceholder: '自宅突撃イキなりギンギン伝説 嗜虐幻想郷 この素晴らしいパーティーにも祝福を',
+        msgAlt: '彭博是猪'
       }
     },
     methods: {

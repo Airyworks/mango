@@ -1,6 +1,6 @@
 const filetree = require('../../data/filetree/').filetree
 
-const root = 'D:\\Dev\\scarlet'
+const root = require('path').join(__static, '..')
 
 function loadRoot(path) {
   filetree.addRoot(path)

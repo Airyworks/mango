@@ -8,6 +8,8 @@ const webpack = require('webpack')
 
 const BabiliWebpackPlugin = require('babili-webpack-plugin')
 
+let whiteListedModules = ['lowdb']
+
 let mainConfig = {
   entry: {
     main: path.join(__dirname, '../src/main/index.js'),
@@ -16,7 +18,7 @@ let mainConfig = {
     server: path.join(__dirname, '../src/main/server/')
   },
   externals: [
-    ...Object.keys(dependencies || {})
+    ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
   ],
   module: {
     rules: [

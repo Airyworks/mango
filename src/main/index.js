@@ -25,6 +25,8 @@ function createWindow () {
     width: 1000
   })
 
+  mainWindow.openDevTools()
+
   mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {

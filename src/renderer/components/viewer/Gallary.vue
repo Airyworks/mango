@@ -1,13 +1,18 @@
 <template>
-  <div class="sc-gallary-container">
+  <div class="sc-gallary-container" ref="sc-gallary-container">
     <div class="sc-gallary" name="viewer">
       <div class="sc-gallary-slider"
         :style="{
           'transition-timing-function': animaOptions.function,
           'transition-duration': animaOptions.duration + 'ms',
-          transform:` translateX(-${index * 100}%)`
+          transform:` translateX(-${currIndex * 100}%)`
         }">
-        <div class="sc-gallary-image-wrapper" v-for="image in images" :key="images.indexOf(image)">
+        <div class="sc-gallary-image-wrapper"
+          v-for="image in images"
+          :key="images.indexOf(image)"
+          @mousedown="clickDown($event)"
+          @touchstart="clickDown($event)">
+        >
           <div class="sc-gallary-image-container">
             <img class="sc-gallary-image" :src="image">
           </div>
@@ -15,8 +20,8 @@
       </div>
     </div>
     <div class="sc-gallary-actions">
-      <button @click="index++">next</button>
-      <button @click="index--">previous</button>
+      <button @click="previous">previous</button>
+      <button @click="next">next</button>
     </div>
   </div>
 </template>
@@ -36,7 +41,15 @@
         animaOptions: {
           function: 'ease',
           duration: 300
-        }
+        },
+        currIndex: 0,
+        dragOption: {
+          enable: true,
+          startX: 0,
+          startY: 0,
+          offset: 0
+        },
+        gallaryWidth: 0
       }
     },
     props: {
@@ -50,6 +63,34 @@
         type: Number,
         default: 0
       }
+    },
+    methods: {
+      previous() {
+        if (this.currIndex > 0) {
+          this.currIndex--
+        }
+      },
+      next() {
+        if (this.currIndex < this.images.length - 1) {
+          this.currIndex++
+        }
+      },
+      clickDown(e) {
+        console.log(e)
+        this.dragOption.startX = e.clientX
+        this.dragOption.startY = e.clientY
+      },
+      resize() {
+        this.gallaryWidth = this.$refs['sc-gallary-container'].offsetWidth
+      }
+    },
+    mounted() {
+      this.currIndex = this.index
+      this.resize()
+      window.addEventListener('resize', this.resize)
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.resize)
     }
   }
 </script>

@@ -20,7 +20,13 @@
         images: [
           '/static/test/69108255_p0.jpg',
           '/static/test/6428005_p0.png',
-          '/static/test/46713305_p0.png'
+          '/static/test/46713305_p0.png',
+          '/static/test/69108255_p0.jpg?1',
+          '/static/test/6428005_p0.png?1',
+          '/static/test/46713305_p0.png?1',
+          '/static/test/69108255_p0.jpg?2',
+          '/static/test/6428005_p0.png?2',
+          '/static/test/46713305_p0.png?2'
         ],
         options: {
           index: 0
