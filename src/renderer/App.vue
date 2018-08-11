@@ -16,7 +16,7 @@
     components: { FileTree },
     data() {
       return {
-        enableCoreValue: true,
+        enableCoreValue: false,
         coreIndex: 0
       }
     },
@@ -45,52 +45,64 @@
 </script>
 
 <style lang="stylus">
-  @import "./assets/fonts/source-sans.css"
+@import "./assets/fonts/source-sans.css"
 
-  *
-    box-sizing border-box
-    font-family "Lucida Grande", "Lucida Sans Unicode", "Hiragino Sans GB", "Microsoft YaHei", 'Source Sans Pro', WenQuanYi Micro Hei, Verdana, Aril, sans-serif
-    user-select none
+*
+  box-sizing border-box
+  font-family "Lucida Grande", "Lucida Sans Unicode", "Hiragino Sans GB", "Microsoft YaHei", 'Source Sans Pro', WenQuanYi Micro Hei, Verdana, Aril, sans-serif
+  user-select none
 
-  body
-    margin 0
+body
+  margin 0
 
-  *
-    box-sizing: border-box;
-    margin: 0
-    padding: 0
+*
+  box-sizing: border-box;
+  margin: 0
+  padding: 0
 
-  a
-    color #333
+a
+  color #333
 
-  #app
-    display grid
-    grid-template-columns 200px 1fr
+#app
+  display grid
+  grid-template-columns 200px 1fr
 
-  .ion
-    display inline
-    vertical-align middle
-  
-  .sc-tree-text
-    height 20px
-    font-size 11px
+.ion
+  display inline
+  vertical-align middle
 
-  .tree-arrow
-    margin-left 0
-    display none
-  .tree-arrow.has-child
-    width 15px
-  .tree-arrow.has-child:after
-    transform rotate(-45deg) translateY(-50%) translateX(0) scale(0.5)
-  .tree-arrow.expanded.has-child:after
-    transform rotate(45deg) translateY(-50%) translateX(-5px) scale(0.5)
+.sc-tree-text
+  height 20px
+  font-size 11px
 
-  .tree-content
-    height 20px
-  .tree-node.selected > .tree-content
-    background-color transparent
-  .tree-anchor
-    padding 3px 2px
+.tree-arrow
+  margin-left 0
+  display none
+.tree-arrow.has-child
+  width 15px
+.tree-arrow.has-child:after
+  transform rotate(-45deg) translateY(-50%) translateX(0) scale(0.5)
+.tree-arrow.expanded.has-child:after
+  transform rotate(45deg) translateY(-50%) translateX(-5px) scale(0.5)
+
+.tree-content
+  height 20px
+.tree-node.selected > .tree-content
+  background-color transparent
+.tree-anchor
+  padding 3px 2px
+
+.ctx-menu
+  border 1px solid #eee
+  box-shadow none
+  border-radius 0
+  padding 5px 0
+  li
+    font-size 10px
+    padding 1px 5px
+    cursor pointer
+    &:hover
+      background-color #fafafa
 
 .core-value-text-popup
   animation: core-value-textPopup 1s

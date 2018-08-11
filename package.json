@@ -34,6 +34,7 @@
     "scarlet-server": "git+https://github.com/Airyworks/scarlet-server.git",
     "vue": "^2.3.3",
     "vue-concise-slider": "^2.4.8",
+    "vue-context-menu": "^2.0.6",
     "vue-electron": "^1.0.6",
     "vue-router": "^2.5.3",
     "vuex": "^2.3.1",

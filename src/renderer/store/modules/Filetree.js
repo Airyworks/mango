@@ -1,7 +1,5 @@
 const filetree = require('../../data/filetree/').filetree
 
-const root = require('path').join(__static, '..')
-
 function loadRoot(path) {
   filetree.addRoot(path)
   const rootNode = filetree.tree.find(v => v.root === path)
@@ -9,13 +7,14 @@ function loadRoot(path) {
   return rootNode
 }
 
-function modNode(node) {
+function modNode(node, isRoot = false) {
   node.data = {
     root: node.root,
     name: node.text,
     isFile: node.isFile,
     origin: node,
-    image: node.image
+    image: node.image,
+    isRoot
   }
   if (node.isFile) {
     node.children = []
@@ -41,9 +40,9 @@ const mutations = {
 }
 
 const actions = {
-  initTree({ commit }) {
+  initTree({ commit }, root) {
     // do something async
-    const tree = modNode(loadRoot(root))
+    const tree = modNode(loadRoot(root), true)
     tree.children.forEach(element => {
       modNode(element)
     })
@@ -56,6 +55,9 @@ const actions = {
     } else {
       commit('UPDATE_TREE', node)
     }
+  },
+  delRoot({ commit }, root) {
+    console.log(root)
   }
 }
 
