@@ -45,7 +45,7 @@
 </script>
 
 <style lang="stylus">
-  @import "/static/fonts/source-sans.css"
+  @import "./assets/fonts/source-sans.css"
 
   *
     box-sizing border-box
