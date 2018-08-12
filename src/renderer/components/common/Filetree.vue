@@ -1,7 +1,7 @@
 <template>
   <div class="sc-filetree">
     <div class="sc-filetree-controller">
-      <p class="sc-filetree-controller-msg" @contextmenu.prevent="$refs.ctxMenu.open">Explorer (Right Click)</p>
+      <p class="sc-filetree-controller-msg">Explorer</p>
       <div class="sc-filetree-controller-icongroup">
         <mu-icon
           @click="addDir"
@@ -18,7 +18,8 @@
       ref="tree"
       class="sc-filetree-tree">
       <span class="sc-tree-text" slot-scope="{ node }"
-        :before-init-node="node.data.fileType = testExtension(node.data.extension)">
+        :before-init-node="node.data.fileType = testExtension(node.data.extension)"
+        @mouseup="openContextMenu(node, $event)">
         <template v-if="node.data.isFile">
           <mu-icon value="photo" class="sc-filetree-icon" v-if="node.data.fileType == 'img'" />
           <mu-icon value="videocam" class="sc-filetree-icon" v-if="node.data.fileType == 'video'" />
@@ -27,9 +28,11 @@
         </template>
 
         <template v-else>
-          <mu-icon value="keyboard_arrow_down" class="sc-filetree-icon" v-show="node.expanded()" />
-          <mu-icon value="keyboard_arrow_right" class="sc-filetree-icon" v-show="!node.expanded()" />
-          {{ node.text }}
+          <div>
+            <mu-icon value="keyboard_arrow_down" class="sc-filetree-icon" v-show="node.expanded()" />
+            <mu-icon value="keyboard_arrow_right" class="sc-filetree-icon" v-show="!node.expanded()" />
+            <span>{{ node.text }}</span>
+          </div>
           <!--
           using right click menu
           <mu-icon value="remove" class="sc-filetree-icon sc-filetree-icon-remove" v-if="node.data.isRoot" />
@@ -38,7 +41,7 @@
       </span>
     </tree>
     <context-menu class="sc-context-menu" ref="ctxMenu">
-      <li @click="doSomething">蓬勃是🐷</li>
+      <li @click="removeRoot">Remove</li>
       <li @click="doSomething">反人类400</li>
     </context-menu>
   </div>
@@ -67,7 +70,8 @@
             getter: 'getTree'
             // mutations: [...mapMutations(['initTree', 'updateTree'])]
           }
-        }
+        },
+        contextNode: undefined
       }
     },
     computed: {
@@ -98,6 +102,19 @@
       forceReload() {
         console.log(selectFile())
       },
+      openContextMenu(node, e) {
+        console.log(node.text, e)
+        if (e.which === 3 && node.data.isRoot) {
+          this.contextNode = node
+          this.$refs.ctxMenu.open()
+          e.stopPropagation()
+        }
+      },
+      removeRoot() {
+        if (this.contextNode) {
+          this.delRoot(this.contextNode)
+        }
+      },
       doSomething() {
         alert('🐔2💥💥')
       },
@@ -113,6 +130,7 @@
         // if (!e.expanded()) {
         //   this.updateTree(e)
         // }
+        console.log(e.text)
         if (!e.data.isFile && e.children.length === 0) {
           console.log('node:selected', e.text)
           this.updateTree(e)
@@ -131,6 +149,7 @@ $controller-height = 20px
   position relative
   .sc-filetree-tree
     height calc(100vh - $controller-height)
+    min-width 100%
     position absolute
     top $controller-height
     z-index 4

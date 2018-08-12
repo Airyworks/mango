@@ -74,6 +74,7 @@ a
 .sc-tree-text
   height 20px
   font-size 11px
+  min-width 100%
 
 .tree-arrow
   margin-left 0
@@ -87,10 +88,14 @@ a
 
 .tree-content
   height 20px
+  padding-right 0
 .tree-node.selected > .tree-content
-  background-color transparent
+  background-color #eee
+  color #fff!important
 .tree-anchor
-  padding 3px 2px
+  padding 0
+.tree > .tree-root, .tree > .tree-filter-empty
+  padding 0 0 6px 0
 
 .ctx-menu
   border 1px solid #eee

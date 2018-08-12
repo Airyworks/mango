@@ -36,6 +36,13 @@ const mutations = {
       modNode(element)
     })
     node.state('expanded', true)
+  },
+  DEL_ROOT(state, root) {
+    for (let i = 0; i < state.tree.length; i++) {
+      if (state.tree[i].data.root === root) {
+        state.tree.splice(i, 1)
+      }
+    }
   }
 }
 
@@ -57,13 +64,13 @@ const actions = {
     }
   },
   delRoot({ commit }, root) {
-    console.log(root)
+    commit('DEL_ROOT', root.data.root)
+    filetree.delRoot(root.data.root)
   }
 }
 
 const getters = {
   getTree(state) {
-    console.log(state)
     return state.tree
   }
 }
