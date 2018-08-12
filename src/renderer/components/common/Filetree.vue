@@ -119,7 +119,7 @@
         alert('🐔2💥💥')
       },
       ...mapMutations([]),
-      ...mapActions(['initTree', 'updateTree', 'delRoot'])
+      ...mapActions(['initTree', 'updateTree', 'delRoot', 'loadPreview'])
     },
     mounted() {
       this.$refs.tree.$on('node:expanded', e => {
@@ -130,7 +130,14 @@
         // if (!e.expanded()) {
         //   this.updateTree(e)
         // }
-        console.log(e.text)
+        console.log(e)
+        const previewNodeArr = []
+        for (let i = 0; i < e.children.length; i++) {
+          if (!e.children[i].data.isFile) {
+            previewNodeArr.push(e.children[i])
+          }
+        }
+        this.loadPreview(previewNodeArr)
         if (!e.data.isFile && e.children.length === 0) {
           console.log('node:selected', e.text)
           this.updateTree(e)

@@ -1,4 +1,4 @@
-const filetree = require('../../data/filetree/').filetree
+const filetree = require('@/data/filetree/').filetree
 
 function loadRoot(path) {
   filetree.addRoot(path)

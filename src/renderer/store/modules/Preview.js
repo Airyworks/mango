@@ -1,20 +1,22 @@
+const coverLoader = require('@/data/loader/cover').coverLoader
+
+console.log(coverLoader)
+
 const state = {
-  main: 0
+  previewList: []
 }
 
 const mutations = {
-  DECREMENT_MAIN_COUNTER (state) {
-    state.main--
-  },
-  INCREMENT_MAIN_COUNTER (state) {
-    state.main++
-  }
 }
 
 const actions = {
-  someAsyncTask ({ commit }) {
+  loadPreview ({ commit }, nodeArr) {
     // do something async
-    commit('INCREMENT_MAIN_COUNTER')
+    setTimeout(() => {
+      console.log(nodeArr)
+      const res = coverLoader.loadCover(nodeArr[0])
+      console.log(res)
+    })
   }
 }
 
