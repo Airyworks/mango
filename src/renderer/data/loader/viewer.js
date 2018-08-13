@@ -38,7 +38,7 @@ export const viewLoader = new class ViewLoader {
       // leave this scope item will be distroyed
       item.data[filename] = data
     }).catch(err => {
-      console.log(err)
+      console.error(err)
       this.isLoading = false
       item.data[filename] = false
     }).finally(() => {
