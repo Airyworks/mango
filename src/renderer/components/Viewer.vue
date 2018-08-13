@@ -2,7 +2,7 @@
   <div class="sc-viewer" name="viewer">
     <Nav :msg="reading.title"/>
     <div class="sc-viewer-main">
-      <Gallary :images="images"/>
+      <Gallery :images="images"/>
     </div>
   </div>
 </template>
@@ -10,23 +10,23 @@
 <script>
   import { mapState } from 'vuex'
   import Nav from '@/components/viewer/Nav'
-  import Gallary from '@/components/viewer/Gallary'
+  import Gallery from '@/components/viewer/Gallery'
 
   export default {
     name: 'Viewer',
-    components: { Nav, Gallary },
+    components: { Nav, Gallery },
     data() {
       return {
         images: [
-          '/static/test/69108255_p0.jpg',
-          '/static/test/6428005_p0.png',
-          '/static/test/46713305_p0.png',
-          '/static/test/69108255_p0.jpg?1',
-          '/static/test/6428005_p0.png?1',
-          '/static/test/46713305_p0.png?1',
-          '/static/test/69108255_p0.jpg?2',
-          '/static/test/6428005_p0.png?2',
-          '/static/test/46713305_p0.png?2'
+          'static/test/69108255_p0.jpg',
+          'static/test/6428005_p0.png',
+          'static/test/46713305_p0.png',
+          'static/test/69108255_p0.jpg?1',
+          'static/test/6428005_p0.png?1',
+          'static/test/46713305_p0.png?1',
+          'static/test/69108255_p0.jpg?2',
+          'static/test/6428005_p0.png?2',
+          'static/test/46713305_p0.png?2'
         ],
         options: {
           index: 0

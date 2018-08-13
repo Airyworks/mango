@@ -1,6 +1,4 @@
-const filetree = require('../../data/filetree/').filetree
-
-const root = require('path').join(__static, '..')
+const filetree = require('@/data/filetree/').filetree
 
 function loadRoot(path) {
   filetree.addRoot(path)
@@ -9,13 +7,14 @@ function loadRoot(path) {
   return rootNode
 }
 
-function modNode(node) {
+function modNode(node, isRoot = false) {
   node.data = {
     root: node.root,
     name: node.text,
     isFile: node.isFile,
     origin: node,
-    image: node.image
+    image: node.image,
+    isRoot
   }
   if (node.isFile) {
     node.children = []
@@ -37,13 +36,20 @@ const mutations = {
       modNode(element)
     })
     node.state('expanded', true)
+  },
+  DEL_ROOT(state, root) {
+    for (let i = 0; i < state.tree.length; i++) {
+      if (state.tree[i].data.root === root) {
+        state.tree.splice(i, 1)
+      }
+    }
   }
 }
 
 const actions = {
-  initTree({ commit }) {
+  initTree({ commit }, root) {
     // do something async
-    const tree = modNode(loadRoot(root))
+    const tree = modNode(loadRoot(root), true)
     tree.children.forEach(element => {
       modNode(element)
     })
@@ -56,12 +62,15 @@ const actions = {
     } else {
       commit('UPDATE_TREE', node)
     }
+  },
+  delRoot({ commit }, root) {
+    commit('DEL_ROOT', root.data.root)
+    filetree.delRoot(root.data.root)
   }
 }
 
 const getters = {
   getTree(state) {
-    console.log(state)
     return state.tree
   }
 }

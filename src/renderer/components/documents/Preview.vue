@@ -19,7 +19,7 @@
     components: { },
     data() {
       return {
-        img: '/static/test/56011481_p0.png',
+        img: 'static/test/56011481_p0.png',
         title: '性感荷官',
         p: 18
       }
@@ -27,11 +27,11 @@
     props: {
       root: {
         type: String,
-        default: '/static/test/56011481_p0.png'
+        default: 'static/test/56011481_p0.png'
       },
       path: {
         type: String,
-        default: '/static/test/56011481_p0.png'
+        default: 'static/test/56011481_p0.png'
       }
     },
     methods: {
