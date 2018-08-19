@@ -6,32 +6,33 @@
     </div>
     <div class="sc-preview-intro-container">
       <p class="sc-preview-intro-title">{{ title }}</p>
-      <a class="sc-preview-intro-more">{{ p }}P</a>
+      <a class="sc-preview-intro-more">{{ page }}P</a>
     </div>
   </div>
 </template>
 
 <script>
   import { mapActions } from 'vuex'
+  import { DEFAULT_PREVIEW, DEFAULT_TITLE } from '@/config/'
 
   export default {
     name: 'Preview',
     components: { },
     data() {
-      return {
-        img: 'static/test/56011481_p0.png',
-        title: '性感荷官',
-        p: 18
-      }
+      return {}
     },
     props: {
-      root: {
+      img: {
         type: String,
-        default: 'static/test/56011481_p0.png'
+        default: DEFAULT_PREVIEW
       },
-      path: {
+      title: {
         type: String,
-        default: 'static/test/56011481_p0.png'
+        default: DEFAULT_TITLE
+      },
+      page: {
+        type: Number,
+        default: 0
       }
     },
     methods: {

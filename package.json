@@ -33,6 +33,7 @@
     "material-icons": "^0.2.3",
     "muse-ui": "^3.0.0-rc.6",
     "scarlet-server": "git+https://github.com/Airyworks/scarlet-server.git",
+    "uuid": "^3.3.2",
     "vue": "^2.3.3",
     "vue-concise-slider": "^2.4.8",
     "vue-context-menu": "^2.0.6",
