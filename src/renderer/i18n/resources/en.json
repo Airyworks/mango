@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "scrollMouse": "scroll mouse wheel",
+    "scrollAltMouse": "scroll mouse wheel while pressing Alt",
+    "bossKey": "hide this window",
+    "scrollDirection": "direction of showing images",
+    "scaleSize": "scale of zooming images",
+    "page": "previous or next image",
+    "scale": "zoom in or out",
+    "vertical": "vertical",
+    "horizontal": "horizontal"
+  },
+  "titles": {
+    "label": "label",
+    "tag": "tag",
+    "startServer": "start server"
+  }
+}

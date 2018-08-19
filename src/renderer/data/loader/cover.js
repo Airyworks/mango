@@ -1,6 +1,8 @@
 const findCover = require('electron').remote.require('./fs').util.findCover
 const fsLoader = require('electron').remote.require('./fs').loader
 
+const absolutePath = require('../filetree/util').absolutePath
+
 // donot need to stop loading
 export const coverLoader = new class CoverLoader {
   constructor() {
@@ -32,13 +34,15 @@ export const coverLoader = new class CoverLoader {
   }
 
   loadCover(node) {
+    node = node.data.origin
     if (!node.image) {
       // give another one chance
-      node.image = findCover(node)
+      node.image = findCover(absolutePath(node))
       if (!node.image) {
         return false
       }
     }
+    console.log(node.image)
 
     let item
     const available = this.queue.find(i => i.path === node.image)

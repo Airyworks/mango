@@ -4621,6 +4621,10 @@ humanize-plus@^1.8.1:
   version "1.8.2"
   resolved "http://registry.npm.taobao.org/humanize-plus/download/humanize-plus-1.8.2.tgz#a65b34459ad6367adbb3707a82a3c9f916167030"
 
+i18next@^11.6.0:
+  version "11.6.0"
+  resolved "http://registry.npm.taobao.org/i18next/download/i18next-11.6.0.tgz#e0047aa3e3a0080f6f318426f90597cbb0d6ddd5"
+
 iconv-lite@0.4.19:
   version "0.4.19"
   resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
@@ -9257,6 +9261,10 @@ vue-html-loader@^1.2.4:
     html-minifier "^2.1.5"
     loader-utils "^1.0.2"
     object-assign "^4.1.0"
+
+vue-i18n@^8.0.0:
+  version "8.0.0"
+  resolved "http://registry.npm.taobao.org/vue-i18n/download/vue-i18n-8.0.0.tgz#ae0c6e05ec8e36151bcf5f47c7b538c8af6d0282"
 
 vue-loader@^13.0.5:
   version "13.7.2"

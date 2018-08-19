@@ -16,6 +16,11 @@ export default new Router({
       component: require('@/components/Viewer').default
     },
     {
+      path: '/setting',
+      name: 'setting',
+      component: require('@/components/Setting').default
+    },
+    {
       path: '*',
       redirect: '/documents'
     }

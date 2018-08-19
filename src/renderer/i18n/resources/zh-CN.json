@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "scrollMouse": "鼠标滚轮",
+    "scrollAltMouse": "鼠标滚轮+Alt",
+    "bossKey": "隐藏窗口",
+    "scrollDirection": "图片滑动方向",
+    "scaleSize": "图片缩放比例",
+    "page": "向前/向后滑动",
+    "scale": "放大/缩小",
+    "vertical": "垂直",
+    "horizontal": "水平"
+  },
+  "titles": {
+    "label": "书签",
+    "tag": "标签",
+    "startServer": "启动本地服务器"
+  }
+}
