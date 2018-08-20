@@ -1,5 +1,7 @@
 const findCover = require('electron').remote.require('./fs').util.findCover
 const fsLoader = require('electron').remote.require('./fs').loader
+const isImage = require('electron').remote.require('./fs').util.isImage
+const scanChildren = require('../filetree').scanChildren
 
 const absolutePath = require('../filetree/util').absolutePath
 
@@ -23,13 +25,22 @@ export const coverLoader = new class CoverLoader {
         item.data = data
         item.resolve(data)
       }).catch(err => {
-        console.log(err)
+        console.error(err)
         this.isLoading = false
         item.data = false
         item.reject(err)
       }).finally(() => {
         this.loop()
       })
+    }
+  }
+
+  containsImages(node) {
+    const children = scanChildren(node)
+    if (node.isFile) {
+      return 0
+    } else {
+      return children.filter(v => isImage(absolutePath(v))).length
     }
   }
 
@@ -42,7 +53,6 @@ export const coverLoader = new class CoverLoader {
         return false
       }
     }
-    console.log(node.image)
 
     let item
     const available = this.queue.find(i => i.path === node.image)

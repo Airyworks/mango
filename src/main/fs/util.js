@@ -44,7 +44,7 @@ export function isImage(dir) {
   if (!isExists(dir) || isDirectory(dir)) {
     return false
   } else {
-    return !!imageExt.find(v => v === path.extname(dir))
+    return !!imageExt.find(v => v === path.extname(dir).toLowerCase())
   }
 }
 

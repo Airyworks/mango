@@ -7,7 +7,7 @@ const findCover = require('electron').remote.require('./fs').util.findCover
 const absolutePath = require('./util').absolutePath
 const rootDisplayPath = path.basename
 
-function scanChildren(node) {
+export function scanChildren(node) {
   const children = scanDir(absolutePath(node))
   children.forEach((value, index, arr) => {
     arr[index] = Object.assign({
@@ -114,6 +114,16 @@ export const filetree = new class Filetree {
     )
 
     node.children = reserve.concat(append)
+    // order files first
+    node.children.sort((a, b) => {
+      if (a.isFile && !b.isFile) {
+        return 1
+      } else if (b.isFile && !a.isFile) {
+        return -1
+      } else {
+        return 0
+      }
+    })
 
     // load cover
     for (const child of node.children) {
