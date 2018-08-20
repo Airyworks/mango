@@ -2,12 +2,16 @@
   <div class="sc-documents" name="documents" ref="documents">
     <div class="sc-preview-container"
       :style="{ width: containerWidth + 'px' }">
-      <Preview v-for="i in previewArr" :key="i" :data="i"/>
+      <Preview v-for="item in previewList" :key="previewList.indexOf(item)"
+        :img="item.img"
+        :title="item.title"
+        :page="item.page"/>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import Preview from '@/components/documents/Preview'
 
   export default {
@@ -15,10 +19,13 @@
     components: { Preview },
     data() {
       return {
-        containerWidth: 1000,
-        previewArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-          11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+        containerWidth: 1000
       }
+    },
+    computed: {
+      ...mapState({
+        previewList: state => state.Preview.previewList
+      })
     },
     methods: {
       open (link) {

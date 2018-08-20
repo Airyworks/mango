@@ -137,7 +137,9 @@
             previewNodeArr.push(e.children[i])
           }
         }
-        this.loadPreview(previewNodeArr)
+        if (previewNodeArr.length > 0) {
+          this.loadPreview(previewNodeArr)
+        }
         if (!e.data.isFile && e.children.length === 0) {
           console.log('node:selected', e.text)
           this.updateTree(e)
