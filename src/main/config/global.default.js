@@ -7,11 +7,9 @@ export const bossKey = {
   ctrl: true,
   alt: false,
   shift: false,
-  key: [
-    'esc'
-  ]
+  key: 'esc'
 }
-export const scrollDirection = 'vertical'
+export const scrollDirection = 'horizontal'
 export const scaleSize = 1
 export const password = ''
 export const downloadDir = path.join(app.getPath('downloads'), 'scarlet/')

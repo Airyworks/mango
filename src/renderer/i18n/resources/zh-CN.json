@@ -1,11 +1,20 @@
 {
+  "general": {
+    "save": "保存",
+    "delete": "删除",
+    "cancel": "取消",
+    "default": "默认值"
+  },
   "settings": {
+    "setting": "设置",
+    "controlSetting": "控制设置",
+    "displaySetting": "显示设置",
     "scrollMouse": "鼠标滚轮",
     "scrollAltMouse": "鼠标滚轮+Alt",
-    "bossKey": "隐藏窗口",
-    "scrollDirection": "图片滑动方向",
+    "bossKey": "隐藏窗口热键",
+    "scrollDirection": "图片上下滑动",
     "scaleSize": "图片缩放比例",
-    "page": "向前/向后滑动",
+    "page": "向前/后滑动",
     "scale": "放大/缩小",
     "vertical": "垂直",
     "horizontal": "水平"
