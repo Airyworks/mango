@@ -1459,8 +1459,8 @@ body-parser@1.18.2:
     type-is "~1.6.15"
 
 body-scroll-lock@^2.4.6:
-  version "2.4.6"
-  resolved "http://registry.npm.taobao.org/body-scroll-lock/download/body-scroll-lock-2.4.6.tgz#3ab8f6aff309cc5ce5ad7702f58308f755e262f3"
+  version "2.5.7"
+  resolved "http://registry.npm.taobao.org/body-scroll-lock/download/body-scroll-lock-2.5.7.tgz#2a3ffc87ef3aa3954ba44073625e5318117cf968"
 
 bonjour@^3.5.0:
   version "3.5.0"
@@ -6192,9 +6192,17 @@ murmur-32@^0.1.0:
     fmix "^0.1.0"
     imul "^1.0.0"
 
+muse-ui-loading@^0.2.0:
+  version "0.2.0"
+  resolved "http://registry.npm.taobao.org/muse-ui-loading/download/muse-ui-loading-0.2.0.tgz#a5ab50617b66314ef2490dc0703f694c255673ee"
+
+muse-ui-toast@^0.3.0:
+  version "0.3.0"
+  resolved "http://registry.npm.taobao.org/muse-ui-toast/download/muse-ui-toast-0.3.0.tgz#572bc6c250579c3d6f4dafc8535e631c401b8db0"
+
 muse-ui@^3.0.0-rc.6:
-  version "3.0.0-rc.7"
-  resolved "http://registry.npm.taobao.org/muse-ui/download/muse-ui-3.0.0-rc.7.tgz#bb4f8cb1893f57835e0d6fef2aad608335c6a1f6"
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/muse-ui/download/muse-ui-3.0.0.tgz#903d78c9520c132f88440465e85b74e72722e7f8"
   dependencies:
     body-scroll-lock "^2.4.6"
     dayjs "^1.6.5"

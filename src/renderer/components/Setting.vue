@@ -36,10 +36,17 @@
               {{ $t('settings.bossKey') }}
             </mu-list-item-title>
             <mu-list-item-action>
-              <mu-flex justify-content="center">
-                <mu-badge class="key-badge" v-if="bossKey.ctrl" content="Ctrl"></mu-badge>
-                <mu-badge class="key-badge" v-if="bossKey.alt" content="Alt"></mu-badge>
-                <mu-badge class="key-badge" v-if="bossKey.shift" content="Shift"></mu-badge>
+              <mu-flex inline align-content="between">
+                <mu-badge class="key-badge" v-if="bossKey.ctrl" content="CTRL"></mu-badge>
+                <mu-badge class="key-badge" v-if="bossKey.alt" content="ALT"></mu-badge>
+                <mu-badge class="key-badge" v-if="bossKey.shift" content="SHIFT"></mu-badge>
+                <mu-badge class="key-badge" v-if="!! bossKey.key" :content="bossKey.key"></mu-badge>
+                <!-- <mu-badge class="key-badge" v-if="bossKey.shift" >
+                  <mu-icon value="keyboard" style="font-size: 16px;" slot="content"></mu-icon>
+                </mu-badge> -->
+                <mu-button color="gray" v-loading="isListening" @click="startKeyListen" icon small>
+                  <mu-icon value="keyboard"></mu-icon>
+                </mu-button>
               </mu-flex>
             </mu-list-item-action>
           </mu-list-item>
@@ -92,13 +99,15 @@
 </template>
 
 <script>
+import hotkeys from 'hotkeys-js'
 const setting = {
   open: false,
+  isListening: false,
   bossKey: {
     ctrl: true,
     alt: false,
     shift: false,
-    key: 'esc'
+    key: 'Escape'
   },
   scrollMouse: 'page',
   scrollHorizontal: false,
@@ -118,25 +127,37 @@ export default {
     },
     scrollDirection () {
       return this.scrollHorizontal ? 'horizontal' : 'vertical'
-    },
-    keyStr () {
-      let keys = []
-      if (this.bossKey.ctrl) {
-        keys.push('Ctrl')
-      }
-      if (this.bossKey.alt) {
-        keys.push('Alt')
-      }
-      if (this.bossKey.shift) {
-        keys.push('Shift')
-      }
-      keys.push(this.bossKey.key)
-      return keys.join('+')
     }
   },
-  method: {
-    startKeyListen () {},
-    stopKeyListen () {}
+  methods: {
+    startKeyListen () {
+      this.$toast.info({
+        message: this.$t('')
+      })
+      this.isListening = true
+      hotkeys('*', e => {
+        e.preventDefault()
+        this.bossKey.shift = hotkeys.shift
+        this.bossKey.ctrl = hotkeys.ctrl || hotkeys.control
+        this.bossKey.alt = hotkeys.alt
+        this.bossKey.key = ['Control', 'Alt', 'Shift'].includes(e.key) ? '' : e.key.toUpperCase()
+      })
+      window.addEventListener('keyup', this.keyupHandler)
+    },
+    stopKeyListen () {
+      hotkeys.unbind('*')
+      window.removeEventListener('keyup', this.keyupHandler)
+      this.isListening = false
+    },
+    keyupHandler (e) {
+      e.preventDefault()
+      if (hotkeys.getPressedKeyCodes().length === 0) {
+        this.stopKeyListen()
+      }
+    },
+    close () {
+      this.open = false
+    }
   },
   data () {
     return setting
@@ -153,5 +174,6 @@ export default {
   margin-bottom: 0
 
 .key-badge
-  margin-left: 8px
+  margin: 8px 8px 0 0
+
 </style>
