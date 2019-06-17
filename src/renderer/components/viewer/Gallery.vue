@@ -34,6 +34,13 @@
   import slider from 'vue-concise-slider'
   import GalleryImage from '@/components/viewer/GalleryImage'
 
+  import { fsLoader } from '@/data/loader'
+  function readBlobAsDataURL(blob, callback) {
+    let a = new FileReader()
+    a.onload = function(e) { callback(e.target.result) }
+    a.readAsDataURL(blob)
+  }
+
   const imageDOM = []
   for (let i = 0; i < 2000; i++) {
     imageDOM.push(i)
@@ -138,12 +145,18 @@
       window.addEventListener('resize', this.resize)
       window.addEventListener('mouseup', this.dragDone)
       for (let image of this.images) {
-        this.pages.push({
-          style: {
-            background: `#111`
-          },
-          component: GalleryImage,
-          image
+        fsLoader(image).then(data => {
+          readBlobAsDataURL(new Blob([data]), (dataurl) => {
+            // this.images.push(dataurl)
+            this.pages.push({
+              style: {
+                background: `#111`
+              },
+              component: GalleryImage,
+              image: dataurl
+            })
+            // console.log('After trans: ' + new Date().getTime())
+          })
         })
       }
     },

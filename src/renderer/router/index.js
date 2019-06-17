@@ -13,7 +13,7 @@ export default new Router({
     {
       path: '/viewer',
       name: 'viewer',
-      component: require('@/components/Viewer').default
+      component: require('@/components/reader/Viewer').default
     },
     {
       path: '/setting',

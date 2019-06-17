@@ -22,7 +22,10 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
-    width: 1000
+    width: 1000,
+    webPreferences: {
+      webSecurity: false
+    }
   })
 
   mainWindow.openDevTools()
@@ -32,6 +35,8 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  mainWindow.setMenu(null)
 }
 
 app.on('ready', createWindow)

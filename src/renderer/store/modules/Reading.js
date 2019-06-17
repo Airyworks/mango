@@ -19,8 +19,15 @@ const actions = {
   }
 }
 
+const getters = {
+  reading (state) {
+    return state.reading
+  }
+}
+
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

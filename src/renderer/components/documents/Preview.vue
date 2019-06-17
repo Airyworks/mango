@@ -1,8 +1,8 @@
 <template>
   <div class="sc-preview"
-    @click="open">
+    @click="open()">
     <div class="sc-preview-img-container">
-      <img class="sc-preview-img" :src="img">
+      <img class="sc-preview-img" :src="url">
     </div>
     <div class="sc-preview-intro-container">
       <p class="sc-preview-intro-title">{{ title }}</p>
@@ -21,14 +21,34 @@
     data() {
       return {}
     },
+    computed: {
+      url() {
+        return this.image
+          .replace(/#/g, '%23')
+          .replace(/\?/g, '%3F')
+          .replace(/&/g, '%26')
+          .replace(/\+/g, '%2B')
+          .replace(/=/g, '%3D')
+          .replace(/@/g, '%40')
+          .replace(/\$/g, '%24')
+      }
+    },
     props: {
-      img: {
-        type: String,
-        default: DEFAULT_PREVIEW
-      },
       title: {
         type: String,
         default: DEFAULT_TITLE
+      },
+      image: {
+        type: String,
+        default: DEFAULT_PREVIEW
+      },
+      path: {
+        type: String,
+        default: ''
+      },
+      root: {
+        type: String,
+        default: ''
       },
       page: {
         type: Number,
@@ -36,7 +56,8 @@
       }
     },
     methods: {
-      open(e) {
+      open() {
+        console.log('preview:', this.$props)
         this.setReading({
           root: this.root,
           path: this.path,

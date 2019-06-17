@@ -15,23 +15,26 @@
     </div>
     <tree
       :options="treeOptions"
+      :data="treeData"
       ref="tree"
+      @node:clicked="onNodeClicked($event)"
+      @node:selected="onNodeSelected($event)"
       class="sc-filetree-tree">
       <span class="sc-tree-text" slot-scope="{ node }"
         :before-init-node="node.data.fileType = testExtension(node.data.extension)"
         @mouseup="openContextMenu(node, $event)">
         <template v-if="node.data.isFile">
           <mu-icon value="photo" class="sc-filetree-icon" v-if="node.data.fileType == 'img'" />
-          <mu-icon value="videocam" class="sc-filetree-icon" v-if="node.data.fileType == 'video'" />
+          <!-- <mu-icon value="videocam" class="sc-filetree-icon" v-if="node.data.fileType == 'video'" /> -->
           <mu-icon value="insert_drive_file" class="sc-filetree-icon" v-if="node.data.fileType == 'other'" />
-          {{ node.text }}
+          {{ node.data.name }}
         </template>
 
         <template v-else>
           <div>
             <mu-icon value="keyboard_arrow_down" class="sc-filetree-icon" v-show="node.expanded()" />
             <mu-icon value="keyboard_arrow_right" class="sc-filetree-icon" v-show="!node.expanded()" />
-            <span>{{ node.text }}</span>
+            <span>{{ node.data.name }}</span>
           </div>
           <!--
           using right click menu
@@ -48,9 +51,10 @@
 </template>
 
 <script>
-  import { mapMutations, mapActions, mapState } from 'vuex'
+  import { mapActions } from 'vuex'
   import contextMenu from 'vue-context-menu'
-  import { selectDir, selectFile } from '@/data/dialog'
+  import { selectDir } from '@/data/dialog'
+  import Tree from './tree'
 
   const extensionRule = {
     'img': ['.jpg', '.jpeg', '.png'],
@@ -59,27 +63,26 @@
 
   export default {
     name: 'Filetree',
+    mixins: [Tree],
     components: { contextMenu },
     data () {
       return {
-        events: [],
+        // events: [],
         treeOptions: {
-          paddingLeft: 10,
-          store: {
-            store: this.$store,
-            getter: 'getTree'
-            // mutations: [...mapMutations(['initTree', 'updateTree'])]
-          }
+          paddingLeft: 10
+          // deletion: node => node.isFile && !isImage(node.origin),
         },
         contextNode: undefined
       }
     },
-    computed: {
-      eventsList() {
-        return this.events.concat().reverse()
-      },
-      ...mapState({
-        tree: state => state.Filetree.tree
+    // computed: {
+    //   eventsList() {
+    //     return this.events.concat().reverse()
+    //   },
+    // },
+    mounted() {
+      this.$nextTick(() => {
+        this.init()
       })
     },
     methods: {
@@ -93,21 +96,17 @@
         }
         return 'other'
       },
-      addDir() {
-        const newDir = selectDir()
-        if (newDir) {
-          this.initTree(newDir[0])
-        }
-      },
-      forceReload() {
-        console.log(selectFile())
-      },
       openContextMenu(node, e) {
-        console.log(node.text, e)
         if (e.which === 3 && node.data.isRoot) {
           this.contextNode = node
           this.$refs.ctxMenu.open()
           e.stopPropagation()
+        }
+      },
+      addDir() {
+        const newDir = selectDir()
+        if (newDir) {
+          this.addRoot(newDir[0])
         }
       },
       removeRoot() {
@@ -118,33 +117,25 @@
       doSomething() {
         alert('🐔2💥💥')
       },
-      ...mapMutations([]),
-      ...mapActions(['initTree', 'updateTree', 'delRoot', 'loadPreview'])
-    },
-    mounted() {
-      this.$refs.tree.$on('node:expanded', e => {
-        // this.updateTree(e)
-      })
-      this.$refs.tree.$on('node:selected', e => {
-        // this.updateTree(e)
-        // if (!e.expanded()) {
-        //   this.updateTree(e)
-        // }
-        console.log(e)
+      onNodeSelected(e) {
+        console.log('node:selected', e)
+        const origin = e.data.origin
+
         const previewNodeArr = []
-        for (let i = 0; i < e.children.length; i++) {
-          if (!e.children[i].data.isFile) {
-            previewNodeArr.push(e.children[i])
+        this.openNode(e)
+        for (let i = 0; i < origin.children.length; i++) {
+          if (!origin.children[i].isFile) {
+            previewNodeArr.push(origin.children[i])
           }
         }
         if (previewNodeArr.length > 0) {
           this.loadPreview(previewNodeArr)
         }
-        if (!e.data.isFile && e.children.length === 0) {
-          console.log('node:selected', e.text)
-          this.updateTree(e)
-        }
-      })
+      },
+      onNodeClicked(e) {
+        console.log('node:click', e)
+      },
+      ...mapActions(['loadPreview'])
     }
   }
 </script>

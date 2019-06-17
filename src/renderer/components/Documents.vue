@@ -3,8 +3,10 @@
     <div class="sc-preview-container"
       :style="{ width: containerWidth + 'px' }">
       <Preview v-for="item in previewList" :key="previewList.indexOf(item)"
-        :img="item.img"
+        :image="item.image"
         :title="item.title"
+        :path="item.path"
+        :root="item.root"
         :page="item.page"/>
     </div>
   </div>

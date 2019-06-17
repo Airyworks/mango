@@ -22,16 +22,22 @@
     },
     methods: {
       coreValuePopup(e) {
+        // close this function
+        if (e) {
+          return false
+        }
+
         if (!this.enableCoreValue) {
           return false
         } else {
           const eleText = document.createElement('span')
           eleText.className = 'core-value-text-popup'
           this.$refs['core-value'].appendChild(eleText)
-          if (!coreValueList[this.coreIndex]) {
-            this.coreIndex = 0
-          }
-          eleText.innerHTML = coreValueList[this.coreIndex]
+          // if (!coreValueList[this.coreIndex]) {
+          //   this.coreIndex = 0
+          // }
+          // eleText.innerHTML = coreValueList[this.coreIndex]
+          eleText.innerHTML = coreValueList[this.coreIndex % coreValueList.length]
           eleText.addEventListener('animationend', function () {
             eleText.parentNode.removeChild(eleText)
           })

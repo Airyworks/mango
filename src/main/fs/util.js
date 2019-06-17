@@ -10,7 +10,7 @@ export function scanDir(dir, recursive = false) {
     for (const item of items) {
       const itemPath = path.join(dir, item)
       const stats = fs.statSync(itemPath)
-      const node = { text: item, isFile: true }
+      const node = { name: item, isFile: true, path: itemPath }
       if (stats.isDirectory()) {
         node.isFile = false
         if (recursive) {
@@ -33,7 +33,7 @@ export function findCover(dir) {
   const files = fs.readdirSync(dir)
   for (const v of files) {
     const realPath = path.join(dir, v)
-    if (!isDirectory(realPath) && imageExt.find(x => x === path.extname(v))) {
+    if (!isDirectory(realPath) && imageExt.find(x => x === path.extname(v).toLowerCase())) {
       return realPath
     }
   }

@@ -1,4 +1,3 @@
-const getAbsPath = require('../filetree/util').absolutePath
 const fileRepoProv = require('../repository/file').file
 const path = require('path')
 const scanDir = require('electron').remote.require('./fs').util.scanDir
@@ -32,15 +31,18 @@ function transSortFunc(sort) {
   }
 }
 
-export class Book {
-  constructor(node) {
-    this.node = node
-    this.absolute = getAbsPath(node)
-    this.repo = fileRepoProv(this.absolute)
+export default class Book {
+  constructor(path) {
+    this.path = path
+    this.repo = fileRepoProv(this.path)
 
     // this.images: ["xxx.jpg", "xxx.png", ...]
     this.reload()
     this.resort()
+  }
+
+  get imagePaths() {
+    return this.images.map(v => path.join(this.path, v))
   }
 
   resort() {
@@ -66,7 +68,7 @@ export class Book {
   }
 
   reload() {
-    this.images = scanDir(this.node).filter(checkIfImage).map(v => v.text)
+    this.images = scanDir(this.path).filter(v => checkIfImage(v.path)).map(v => v.name)
   }
 
   get process() {

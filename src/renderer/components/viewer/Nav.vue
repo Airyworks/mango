@@ -4,9 +4,10 @@
       <mu-icon class="sc-nav-icon" value="keyboard_arrow_left"></mu-icon>
     </div>
     <div class="sc-nav-title-container">
-      <mu-tooltip :content="msgAlt">
+      <!-- <mu-tooltip :content="msgAlt">
         <p class="sc-nav-title">{{ msg || msgPlaceholder }}</p>
-      </mu-tooltip>
+      </mu-tooltip> -->
+        <p class="sc-nav-title">{{ msg || msgPlaceholder }}</p>
     </div>
     <div class="sc-nav-title-actions">
       <mu-button class="sc-nav-title-button" ref="button" small color="primary" @click="open = !open">
@@ -25,11 +26,11 @@
               <mu-icon value="star_border"></mu-icon>
             </mu-list-item-title>
           </mu-list-item>
-          <mu-list-item button class="sc-nav-title-more-btn">
+          <!-- <mu-list-item button class="sc-nav-title-more-btn">
             <mu-list-item-title>
               <mu-icon value="delete_forever"></mu-icon>
             </mu-list-item-title>
-          </mu-list-item>
+          </mu-list-item> -->
         </mu-list>
       </mu-popover>
     </div>
@@ -45,8 +46,7 @@
       return {
         open: false,
         trigger: null,
-        msgPlaceholder: '自宅突撃イキなりギンギン伝説 嗜虐幻想郷 この素晴らしいパーティーにも祝福を',
-        msgAlt: '彭博是猪'
+        msgPlaceholder: '[NO TITLE]'
       }
     },
     methods: {
@@ -54,7 +54,7 @@
         this.$router.push('documents')
       },
       copyTitle() {
-        clipboard.writeText(this.msg || this.msgPlaceholder)
+        clipboard.writeText(this.filePath || this.msg || this.msgPlaceholder)
         this.open = false
       }
     },
@@ -63,6 +63,10 @@
     },
     props: {
       msg: {
+        type: String,
+        default: ''
+      },
+      filePath: {
         type: String,
         default: ''
       }

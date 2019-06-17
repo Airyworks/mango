@@ -7,7 +7,7 @@ export const bossKey = {
   ctrl: true,
   alt: false,
   shift: false,
-  key: 'Escape'
+  key: 'ESCAPE'
 }
 export const scrollDirection = 'horizontal'
 export const scaleSize = 1

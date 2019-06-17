@@ -44,8 +44,9 @@
                 <!-- <mu-badge class="key-badge" v-if="bossKey.shift" >
                   <mu-icon value="keyboard" style="font-size: 16px;" slot="content"></mu-icon>
                 </mu-badge> -->
-                <mu-button color="gray" v-loading="isListening" @click="startKeyListen" icon small>
-                  <mu-icon value="keyboard"></mu-icon>
+                <mu-button color="gray" @click="startKeyListen" icon small>
+                  <mu-icon v-if="!isListening" value="keyboard"></mu-icon>
+                  <mu-icon v-else value="fiber_manual_record"></mu-icon>
                 </mu-button>
               </mu-flex>
             </mu-list-item-action>
@@ -95,19 +96,24 @@
         </mu-list-item>
       </mu-list>
     <!-- </mu-paper> -->
+    <mu-snackbar :position="toast.position" :open.sync="toast.open">
+      {{toast.message}}
+      <mu-button flat slot="action" color="secondary" @click="toast.open = false">Close</mu-button>
+    </mu-snackbar>
   </mu-drawer>
 </template>
 
 <script>
 import hotkeys from 'hotkeys-js'
+
 const setting = {
-  open: false,
+  open: true,
   isListening: false,
   bossKey: {
     ctrl: true,
     alt: false,
     shift: false,
-    key: 'Escape'
+    key: 'ESCAPE'
   },
   scrollMouse: 'page',
   scrollHorizontal: false,
@@ -130,10 +136,18 @@ export default {
     }
   },
   methods: {
+    openToast (msg, duration = 0, pos = 'top') {
+      this.toast.message = msg
+      this.toast.position = pos
+      this.toast.open = true
+      if (duration) {
+        window.setTimeout(() => {
+          this.toast.open = false
+        }, duration)
+      }
+    },
     startKeyListen () {
-      this.$toast.info({
-        message: this.$t('')
-      })
+      this.openToast(this.$t('settings.keydownTips'), 3000)
       this.isListening = true
       hotkeys('*', e => {
         e.preventDefault()
@@ -160,7 +174,13 @@ export default {
     }
   },
   data () {
-    return setting
+    return Object.assign({}, setting, {
+      toast: {
+        position: 'top',
+        open: false,
+        message: 'Test'
+      }
+    })
   }
 }
 </script>

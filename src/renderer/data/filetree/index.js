@@ -14,7 +14,8 @@ export function scanChildren(node) {
       image: undefined,
       expanded: false,
       root: node.root,
-      parent: node
+      children: [],
+      isRoot: false
     }, value)
   })
 
@@ -25,7 +26,7 @@ function copyExpandedTree(from, to) {
   to.expanded = from.expanded
   to.children = scanChildren(to)
   for (const child of from.children) {
-    const toChild = to.children.find(v => v.text === child.text)
+    const toChild = to.children.find(v => v.name === child.name)
     if (toChild &&
         !child.isFile &&
         !toChild.isFile &&
@@ -64,12 +65,13 @@ export const filetree = new class Filetree {
 
     for (const root of this.roots) {
       newTree.push({
-        text: rootDisplayPath(root),
+        name: rootDisplayPath(root),
+        path: root,
         root,
         image: undefined,
         expanded: false,
-        parent: null,
         isFile: false,
+        isRoot: true,
         children: []
       })
     }
@@ -99,13 +101,13 @@ export const filetree = new class Filetree {
     // compare difference between the new and the old
     const reserve = node.children.filter(
       v => children.find(
-        k => k.text === v.text && k.isFile === v.isFile
+        k => k.name === v.name && k.isFile === v.isFile
       )
     )
     const append = children.filter(
       v => {
         for (const i of node.children) {
-          if (i.text === v.text && i.isFile === v.isFile) {
+          if (i.name === v.name && i.isFile === v.isFile) {
             return false
           }
         }
@@ -151,15 +153,20 @@ export const filetree = new class Filetree {
         isExists(root) &&
         isDirectory(root)) {
       this.roots.push(root)
-      this.tree.push({
-        text: rootDisplayPath(root),
+      const rootNode = {
+        name: rootDisplayPath(root),
+        path: root,
         root,
         image: undefined,
         expanded: false,
-        parent: null,
         isFile: false,
+        isRoot: true,
         children: []
-      })
+      }
+      this.tree.push(rootNode)
+      return rootNode
+    } else {
+      return null
     }
   }
   delRoot(root) {
