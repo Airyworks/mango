@@ -25,7 +25,7 @@ const actions = {
       const node = nodeArr[i]
       const previewItem = {
         uuid: uuidv1(),
-        image: node.image,
+        image: node.image.startsWith('/') ? ('file://' + node.image) : node.image,
         title: node.name,
         path: node.path,
         root: node.root,
